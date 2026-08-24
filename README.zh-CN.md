@@ -7,7 +7,7 @@
 [![dsh Web 插件](https://img.shields.io/badge/dsh-Web%20%E6%8F%92%E4%BB%B6-4f46e5?style=for-the-badge)](https://npmjs.com/package/@deepseek-ai/dsh)
 [![npm](https://img.shields.io/npm/v/%40kesike%2Fdsh-exit?style=for-the-badge&label=npm)](https://www.npmjs.com/package/@kesike/dsh-exit)
 [![平台](https://img.shields.io/badge/%E5%B9%B3%E5%8F%B0-Web-0ea5e9?style=for-the-badge)](https://github.com/KeS1Ke/dsh-exit)
-[![版本](https://img.shields.io/badge/%E7%89%88%E6%9C%AC-0.2.2-64748b?style=for-the-badge)](package.json)
+[![版本](https://img.shields.io/badge/%E7%89%88%E6%9C%AC-0.2.3-64748b?style=for-the-badge)](package.json)
 [![依赖](https://img.shields.io/badge/%E8%BF%90%E8%A1%8C%E6%97%B6%E4%BE%9D%E8%B5%96-%E6%97%A0-16a34a?style=for-the-badge)](package.json)
 
 **简体中文** | [English](https://github.com/KeS1Ke/dsh-exit/blob/main/README.md)
@@ -21,7 +21,8 @@
 
 `dsh-exit` 在 dsh 设置面板中增加一个独立的**退出**栏目，并使用最高排序值，确保新安装的设置类插件仍排在它前面。
 
-- **退出**栏目始终位于设置左侧导航的最底部。\n- 先弹出确认弹窗，确认前不会执行退出动作。
+- 先弹出确认弹窗，确认前不会执行退出动作。
+- **退出**栏目始终位于设置左侧导航的最底部。
 - 确认后调用类型化的 `dshExit/exit` Remote 方法。
 - 先返回调用应答，再等待短暂窗口结束宿主进程。
 - 释放该进程占用的全部端口；设置页会显示当前 dsh Web 的真实主机和端口。
@@ -33,13 +34,13 @@
 下面的动画、视频和截图是仓库专用展示素材，保留在 GitHub 用于文档展示，并明确排除在 npm 包之外。
 
 <p align="center">
-  <img src="docs/dsh-exit-landscape.webp" alt="由 Archify 生成的横版 dsh-exit 动态流程图" width="720">
+  <img src="https://raw.githubusercontent.com/KeS1Ke/dsh-exit/main/docs/dsh-exit-landscape.webp" alt="由 Archify 生成的横版 dsh-exit 动态流程图" width="720">
 </p>
 
 <p align="center">
-  <video controls muted loop playsinline width="720" poster="docs/dsh-exit-landscape.webp">
-    <source src="docs/dsh-exit-landscape.mp4" type="video/mp4">
-    <source src="docs/dsh-exit-landscape.webm" type="video/webm">
+  <video controls muted loop playsinline width="720" poster="https://raw.githubusercontent.com/KeS1Ke/dsh-exit/main/docs/dsh-exit-landscape.webp">
+    <source src="https://raw.githubusercontent.com/KeS1Ke/dsh-exit/main/docs/dsh-exit-landscape.mp4" type="video/mp4">
+    <source src="https://raw.githubusercontent.com/KeS1Ke/dsh-exit/main/docs/dsh-exit-landscape.webm" type="video/webm">
     <a href="https://github.com/KeS1Ke/dsh-exit/blob/main/docs/dsh-exit-landscape.mp4">下载退出流程视频</a>
   </video>
 </p>
@@ -49,7 +50,7 @@
 下图是已经安装 `dsh-exit` 的真实 dsh 设置界面；红色的**退出**就是设置左侧列表底部的插件导航项。
 
 <p align="center">
-  <img src="docs/dsh-exit-real.png" alt="运行中的 dsh Web 界面与右下角 dsh-exit 电源按钮" width="720">
+  <img src="https://raw.githubusercontent.com/KeS1Ke/dsh-exit/main/docs/dsh-exit-real.png" alt="运行中的 dsh Web 设置界面与底部的 dsh-exit 退出栏目" width="720">
 </p>
 
 ## 🧱 npm 包内容
@@ -67,7 +68,8 @@ npm 包只包含上面四个核心运行文件、包元数据和 README；GitHub
 | --- | --- |
 | 动画 WebP | [`docs/dsh-exit-landscape.webp`](https://github.com/KeS1Ke/dsh-exit/blob/main/docs/dsh-exit-landscape.webp) |
 | MP4 / WebM 视频 | [`docs/dsh-exit-landscape.mp4`](https://github.com/KeS1Ke/dsh-exit/blob/main/docs/dsh-exit-landscape.mp4) · [`docs/dsh-exit-landscape.webm`](https://github.com/KeS1Ke/dsh-exit/blob/main/docs/dsh-exit-landscape.webm) |
-| Archify 源文件 | [`docs/exit-flow-landscape.html`](https://github.com/KeS1Ke/dsh-exit/blob/main/docs/exit-flow-landscape.html) · [`docs/exit-flow-landscape.workflow.json`](https://github.com/KeS1Ke/dsh-exit/blob/main/docs/exit-flow-landscape.workflow.json) | 最新校验通过的流程图 HTML 与 workflow 源文件。 |\n| 真实界面截图 | [`docs/dsh-exit-real.png`](https://github.com/KeS1Ke/dsh-exit/blob/main/docs/dsh-exit-real.png) | 最新真实 dsh 设置导航与红色退出项。 |
+| Archify 源文件 | [`docs/exit-flow-landscape.html`](https://github.com/KeS1Ke/dsh-exit/blob/main/docs/exit-flow-landscape.html) · [`docs/exit-flow-landscape.workflow.json`](https://github.com/KeS1Ke/dsh-exit/blob/main/docs/exit-flow-landscape.workflow.json) |
+| 真实界面截图 | [`docs/dsh-exit-real.png`](https://github.com/KeS1Ke/dsh-exit/blob/main/docs/dsh-exit-real.png) |
 
 
 ## 🚀 从 npm 安装
@@ -89,7 +91,7 @@ dsh plugin --profile web remove @kesike/dsh-exit
 
 | 操作 | 结果 |
 | --- | --- |
-| 打开设置并点击最后的**退出**栏目 | 查看当前 dsh Web 端口并打开退出确认。 |
+| 点击设置左侧列表底部的红色**退出**栏目 | 打开退出栏目和确认操作。 |
 | 点击**取消**、按 `Esc` 或点击弹窗外部 | 关闭弹窗，不改变宿主状态。 |
 | 点击**确认退出** | 禁用重复操作并调用宿主 Remote 方法。 |
 | Remote 调用失败 | 恢复控件并显示行内错误信息。 |
@@ -121,10 +123,10 @@ node --check lib/client.js
 
 - **目标：** DeepSeek Harness Web profile
 - **安装方式：** npm 包
-- **界面位置：** 设置左侧导航最底部
+- **界面位置：** 设置左侧导航的最后一栏
 - **执行动作：** 结束 dsh 宿主进程
 - **运行端口：** 从设置页当前 dsh Web 地址动态读取
-- **仓库主题：** `dsh` · `deepseek-harness` · `plugin` · `javascript` · `web`
+- **仓库主题：** `dsh` · `deepseek-harness` · `dsh-plugin` · `plugin` · `javascript` · `web`
 
 电源图标来自 [Lucide](https://lucide.dev/icons/power)，遵循其 ISC 许可使用。
 
