@@ -7,7 +7,7 @@
 [![dsh Web 插件](https://img.shields.io/badge/dsh-Web%20%E6%8F%92%E4%BB%B6-4f46e5?style=for-the-badge)](https://npmjs.com/package/@deepseek-ai/dsh)
 [![npm](https://img.shields.io/npm/v/%40kesike%2Fdsh-exit?style=for-the-badge&label=npm)](https://www.npmjs.com/package/@kesike/dsh-exit)
 [![平台](https://img.shields.io/badge/%E5%B9%B3%E5%8F%B0-Web-0ea5e9?style=for-the-badge)](https://github.com/KeS1Ke/dsh-exit)
-[![版本](https://img.shields.io/badge/%E7%89%88%E6%9C%AC-0.2.1-64748b?style=for-the-badge)](package.json)
+[![版本](https://img.shields.io/badge/%E7%89%88%E6%9C%AC-0.2.2-64748b?style=for-the-badge)](package.json)
 [![依赖](https://img.shields.io/badge/%E8%BF%90%E8%A1%8C%E6%97%B6%E4%BE%9D%E8%B5%96-%E6%97%A0-16a34a?style=for-the-badge)](package.json)
 
 **简体中文** | [English](https://github.com/KeS1Ke/dsh-exit/blob/main/README.md)
@@ -24,7 +24,7 @@
 - **退出**栏目始终位于设置左侧导航的最底部。\n- 先弹出确认弹窗，确认前不会执行退出动作。
 - 确认后调用类型化的 `dshExit/exit` Remote 方法。
 - 先返回调用应答，再等待短暂窗口结束宿主进程。
-- 释放该进程占用的全部端口，包括常见的 `127.0.0.1:3080`。
+- 释放该进程占用的全部端口；设置页会显示当前 dsh Web 的真实主机和端口。
 - 保留宿主终端窗口和浏览器标签页，方便后续操作。
 - 使用 dsh 现有设计令牌与 Lucide `power` 电源图标。
 
@@ -123,7 +123,7 @@ node --check lib/client.js
 - **安装方式：** npm 包
 - **界面位置：** 右下角悬浮控件
 - **执行动作：** 结束 dsh 宿主进程
-- **dsh 常见端口：** `127.0.0.1:3080`
+- **运行端口：** 从设置页当前 dsh Web 地址动态读取
 - **仓库主题：** `dsh` · `deepseek-harness` · `plugin` · `javascript` · `web`
 
 电源图标来自 [Lucide](https://lucide.dev/icons/power)，遵循其 ISC 许可使用。
