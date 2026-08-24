@@ -7,7 +7,7 @@
 [![dsh web plugin](https://img.shields.io/badge/dsh-web%20plugin-4f46e5?style=for-the-badge)](https://npmjs.com/package/@deepseek-ai/dsh)
 [![npm](https://img.shields.io/npm/v/%40kesike%2Fdsh-exit?style=for-the-badge&label=npm)](https://www.npmjs.com/package/@kesike/dsh-exit)
 [![Platform](https://img.shields.io/badge/platform-web-0ea5e9?style=for-the-badge)](https://github.com/KeS1Ke/dsh-exit)
-[![Version](https://img.shields.io/badge/version-0.2.1-64748b?style=for-the-badge)](package.json)
+[![Version](https://img.shields.io/badge/version-0.2.2-64748b?style=for-the-badge)](package.json)
 [![Dependencies](https://img.shields.io/badge/runtime%20dependencies-none-16a34a?style=for-the-badge)](package.json)
 
 [简体中文](https://github.com/KeS1Ke/dsh-exit/blob/main/README.zh-CN.md)
@@ -24,7 +24,7 @@
 - Keeps the **Exit** section at the bottom of the settings navigation.\n- Opens a confirmation modal before doing anything destructive.
 - Calls the typed `dshExit/exit` Remote method only after confirmation.
 - Gives the gateway a short acknowledgement window, then ends the host process.
-- Releases every port held by that process, including the usual `127.0.0.1:3080`.
+- Releases every port held by that process; the settings page displays the current dsh Web host and port.
 - Keeps the terminal window and browser tab available for the next action.
 - Uses the existing dsh design tokens and the Lucide `power` icon.
 
@@ -123,7 +123,7 @@ node --check lib/client.js
 - **Install mode:** npm package
 - **Surface:** lower-right floating control
 - **Action:** terminate the dsh host process
-- **Default port mentioned by dsh:** `127.0.0.1:3080`
+- **Runtime port:** read from the current dsh Web address in the settings page
 - **Repository topics:** `dsh` · `deepseek-harness` · `plugin` · `javascript` · `web`
 
 The power icon comes from [Lucide](https://lucide.dev/icons/power) and is used under its ISC license.
