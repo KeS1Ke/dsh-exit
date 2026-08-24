@@ -1,26 +1,111 @@
+<div align="center">
+
 # dsh-exit
 
-**English** | [简体中文](README.zh-CN.md)
+**A focused exit control for the DeepSeek Harness web interface.**
 
-A [DeepSeek Harness](https://npmjs.com/package/@deepseek-ai/dsh) (dsh) web plugin that adds a floating **Exit** button at the lower-right of the entire interface. It only exits dsh and releases the occupied port.
+[![dsh web plugin](https://img.shields.io/badge/dsh-web%20plugin-4f46e5?style=for-the-badge)](https://npmjs.com/package/@deepseek-ai/dsh)
+[![Platform](https://img.shields.io/badge/platform-web-0ea5e9?style=for-the-badge)](https://github.com/KeS1Ke/dsh-exit)
+[![Version](https://img.shields.io/badge/version-0.1.0-64748b?style=for-the-badge)](package.json)
+[![Dependencies](https://img.shields.io/badge/runtime%20dependencies-none-16a34a?style=for-the-badge)](package.json)
 
-## What it does
+[简体中文](README.zh-CN.md)
 
-- Adds a compact circular **Exit** button at the lower-right of the entire interface (error-red power icon — the same red the archive-manager uses for "delete session", icon: [Lucide `power`](https://lucide.dev/icons/power), ISC license).
-- First click opens a confirmation dialog; confirming then:
-  1. terminates the dsh host process — every port it holds (default `127.0.0.1:3080`) is released;
-  2. leaves the host terminal window and browser tab open.
+</div>
 
-## Install (local, unpublished)
+> [!IMPORTANT]
+> Confirming the action terminates the dsh host process and releases its ports. The host terminal window and the current browser tab are intentionally left open.
+
+## ✨ What it does
+
+`dsh-exit` adds a compact, floating **Exit** button to the lower-right corner of the entire dsh web interface.
+
+- Opens a confirmation modal before doing anything destructive.
+- Calls the typed `dshExit/exit` Remote method only after confirmation.
+- Gives the gateway a short acknowledgement window, then ends the host process.
+- Releases every port held by that process, including the usual `127.0.0.1:3080`.
+- Keeps the terminal window and browser tab available for the next action.
+- Uses the existing dsh design tokens and the Lucide `power` icon.
+
+## 🧭 Exit flow
+
+```mermaid
+flowchart LR
+    A["Floating Exit button"] --> B["Confirmation modal"]
+    B -->|Cancel / Esc| C["Stay in dsh"]
+    B -->|Confirm| D["remote.dshExit.exit()"]
+    D --> E["Return acknowledgement"]
+    E --> F["400 ms grace period"]
+    F --> G["process.exit(0)"]
+    G --> H["Ports released"]
+    G -.-> I["Terminal + browser tab remain open"]
+```
+
+## 🧱 What ships
+
+| Layer | File | Responsibility |
+| --- | --- | --- |
+| Host | [`lib/index.js`](lib/index.js) | Registers the `dshExit` Cordis service and the typed `exit()` Remote method. |
+| Client | [`lib/client.js`](lib/client.js) | Self-contained browser bundle: button, CSS, modal, keyboard handling, and Remote mounting. |
+| Bundle patch | [`cordis.patch.yml`](cordis.patch.yml) | Inserts the plugin row into the dsh profile. |
+| Package metadata | [`package.json`](package.json) | Declares the host entry, web client, and bundle patch. |
+
+## 🚀 Install locally
+
+The plugin is currently local and unpublished. Add it to a dsh web profile:
 
 ```sh
 dsh plugin --profile web add "D:\Vibe-coding Projects\dsh\dsh-exit"
 ```
 
-Then restart the profile. No dependencies — bare imports resolve through the dsh host loader.
+Restart the profile after installation. The dsh host loader resolves the bare runtime imports, so this package intentionally declares no runtime dependencies.
 
-## Structure
+## 🖥️ UI behavior
 
-- `lib/index.js` — host side: registers the `dshExit` cordis service and its Typert Remote method `exit()` (served at `/api/dshExit/exit`).
-- `lib/client.js` — browser bundle (self-contained, no imports): floating-position CSS, exit button, confirmation modal.
-- `cordis.patch.yml` — profile patch layer inserting the plugin row.
+| Interaction | Result |
+| --- | --- |
+| Click the floating power button | Opens the confirmation modal. |
+| Click **Cancel**, press **Esc**, or click outside | Closes the modal without changing the host. |
+| Click **Confirm exit** | Disables duplicate actions and invokes the host Remote method. |
+| Remote call fails | Restores the controls and shows an inline error message. |
+| Remote call succeeds | Closes the modal; the host exits shortly afterward. |
+
+## 🔌 Remote contract
+
+The host advertises a strict, parameterless Remote method:
+
+```text
+namespace: dshExit
+method:    exit
+result:    true
+gateway:   /api/dshExit/exit
+```
+
+The client-side dsh gateway returns the standard envelope `{ ok: true, value: true }` on success. The service guards repeated calls with an `exiting` flag and schedules `process.exit(0)` after the response has a chance to settle.
+
+## 🧪 Development checks
+
+Run the lightweight syntax checks from the project root:
+
+```sh
+node --check lib/index.js
+node --check lib/client.js
+```
+
+## 🗺️ Quick reference
+
+- **Target:** DeepSeek Harness web profile
+- **Install mode:** local plugin
+- **Surface:** lower-right floating control
+- **Action:** terminate the dsh host process
+- **Default port mentioned by dsh:** `127.0.0.1:3080`
+- **Repository topics:** `dsh` · `deepseek-harness` · `plugin` · `javascript` · `web`
+
+The power icon comes from [Lucide](https://lucide.dev/icons/power) and is used under its ISC license.
+
+<div align="center">
+
+<sub>Small surface, explicit confirmation, predictable exit behavior.</sub>
+
+</div>
+
