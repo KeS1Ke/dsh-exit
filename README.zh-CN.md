@@ -30,14 +30,7 @@
 ## 🎬 动态退出流程
 
 <p align="center">
-  <video controls loop muted playsinline width="720" poster="docs/dsh-exit-real.png">
-    <source src="docs/dsh-exit.webm" type="video/webm">
-    <a href="docs/dsh-exit.webm">下载 Archify WebM 动画</a>
-  </video>
-</p>
-
-<p align="center">
-  <a href="docs/exit-flow-zh.html">打开 Archify 交互式流程图</a>
+  <img src="docs/dsh-exit.gif" alt="由 Archify 生成的 dsh-exit 动态流程图" width="720">
 </p>
 
 ## 📸 真实 dsh 界面
@@ -56,10 +49,8 @@
 | 客户端 | [`lib/client.js`](lib/client.js) | 自包含浏览器 bundle：按钮、样式、弹窗、键盘交互和 Remote 挂载。 |
 | Bundle 补丁 | [`cordis.patch.yml`](cordis.patch.yml) | 向 dsh profile 插入插件行。 |
 | 包元数据 | [`package.json`](package.json) | 声明宿主入口、Web 客户端和 Bundle 补丁。 |
-| 动态流程 | [`docs/dsh-exit.webm`](docs/dsh-exit.webm) | Archify 生成的 6 秒 trace 动画。 |
-| 交互图 | [`docs/exit-flow-zh.html`](docs/exit-flow-zh.html) | 完整 Archify 查看器，支持动画和探索。 |
+| 动态流程 | [`docs/dsh-exit.gif`](docs/dsh-exit.gif) | Archify trace 动画转换成可直接嵌入 GitHub 的 GIF。 |
 | 真实界面截图 | [`docs/dsh-exit-real.png`](docs/dsh-exit-real.png) | 已运行 dsh Web profile 中的实际按钮。 |
-| 图表源文件 | [`docs/exit-flow-zh.workflow.json`](docs/exit-flow-zh.workflow.json) | 已通过校验的 Archify workflow 规格。 |
 
 
 ## 🚀 本地安装
