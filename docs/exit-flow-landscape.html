@@ -1,0 +1,1186 @@
+Warning: truncated output (original token count: 167574)
+Total output lines: 14451
+
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" data-preset="classic">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="generator" content="archify 2.15.0">
+  <title>dsh-exit · 横版退出流程 Diagram</title>
+  <script>
+    // Resolve the theme before first paint so light-preference users don't
+    // see a dark flash. The toolbar script below re-applies with UI state.
+    (function () {
+      try {
+        var theme = null;
+        try {
+          var param = new URLSearchParams(window.location.search).get('theme');
+          if (param === 'light' || param === 'dark') theme = param;
+          if (new URLSearchParams(window.location.search).get('embed') === '1') {
+            document.documentElement.setAttribute('data-embed', 'true');
+          }
+          if (new URLSearchParams(window.location.search).get('present') === '1') {
+            document.documentElement.setAttribute('data-present', 'true');
+          }
+        } catch (_) {}
+        if (!theme) {
+          try { theme = localStorage.getItem('archify-theme'); } catch (_) {}
+        }
+        if (theme !== 'light' && theme !== 'dark') {
+          theme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        }
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (_) {}
+    })();
+  </script>
+  <!-- Async font load: a blackholed network must not block first paint.
+       The body font stack falls back to system monospace until it lands. -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+        rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  </noscript>
+  <style>
+    /* ==========================================================
+       THEME VARIABLES — switch by toggling [data-theme] on <html>
+       ========================================================== */
+    :root,
+    [data-theme="dark"] {
+      --bg: #020617;
+      --grid: #1e293b;
+      --text: #ffffff;
+      --text-muted: #94a3b8;
+      --text-dim: #475569;
+      /* UI chrome and menu hints need more contrast than SVG .t-dim accents */
+      --text-faint: #7d8da1;
+
+      --panel: rgba(15, 23, 42, 0.5);
+      --panel-border: #1e293b;
+      --lane-fill: rgba(15, 23, 42, 0.22);
+      --lane-stroke: #334155;
+
+      --arrow: #64748b;
+      --arrow-emphasis: #34d399;
+
+      /* Opaque mask color used behind semi-transparent component fills
+         so the arrows drawn underneath are properly hidden. */
+      --mask: #0f172a;
+
+      --frontend-fill:    rgba(8, 51, 68, 0.4);
+      --frontend-stroke:  #22d3ee;
+      --backend-fill:     rgba(6, 78, 59, 0.4);
+      --backend-stroke:   #34d399;
+      --database-fill:    rgba(76, 29, 149, 0.4);
+      --database-stroke:  #a78bfa;
+      --cloud-fill:       rgba(120, 53, 15, 0.3);
+      --cloud-stroke:     #fbbf24;
+      --security-fill:    rgba(136, 19, 55, 0.4);
+      --security-stroke:  #fb7185;
+      --messagebus-fill:  rgba(251, 146, 60, 0.3);
+      --messagebus-stroke:#fb923c;
+      --external-fill:    rgba(30, 41, 59, 0.5);
+      --external-stroke:  #94a3b8;
+
+      --toolbar-bg:       rgba(15, 23, 42, 0.8);
+      --toolbar-border:   #334155;
+      --toolbar-text:     #e2e8f0;
+      --toolbar-hover:    rgba(15, 23, 42, 0.95);
+      --toolbar-menu-bg:  #0f172a;
+    }
+
+    [data-theme="light"] {
+      --bg: #f8fafc;
+      --grid: #e2e8f0;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --text-dim: #94a3b8;
+      --text-faint: #64748b;
+
+      --panel: #ffffff;
+      --panel-border: #e2e8f0;
+      --lane-fill: rgba(248, 250, 252, 0.65);
+      --lane-stroke: #cbd5e1;
+
+      --arrow: #94a3b8;
+      --arrow-emphasis: #059669;
+
+      --mask: #ffffff;
+
+      --frontend-fill:    rgba(34, 211, 238, 0.15);
+      --frontend-stroke:  #0891b2;
+      --backend-fill:     rgba(52, 211, 153, 0.18);
+      --backend-stroke:   #059669;
+      --database-fill:    rgba(167, 139, 250, 0.2);
+      --database-stroke:  #7c3aed;
+      --cloud-fill:       rgba(251, 191, 36, 0.18);
+      --cloud-stroke:     #d97706;
+      --security-fill:    rgba(251, 113, 133, 0.15);
+      --security-stroke:  #e11d48;
+      --messagebus-fill:  rgba(251, 146, 60, 0.15);
+      --messagebus-stroke:#ea580c;
+      --external-fill:    rgba(148, 163, 184, 0.18);
+      --external-stroke:  #64748b;
+
+      --toolbar-bg:       rgba(255, 255, 255, 0.92);
+      --toolbar-border:   #cbd5e1;
+      --toolbar-text:     #334155;
+      --toolbar-hover:    #ffffff;
+      --toolbar-menu-bg:  #ffffff;
+    }
+
+    /* ==========================================================
+       SIGNAL FLOW — an opt-in, motion-forward visual preset.
+       The variables also target a standalone exported SVG, whose
+       root carries data-preset and data-theme directly.
+       ========================================================== */
+    [data-preset="signal-flow"][data-theme="dark"] {
+      --bg: #030711;
+      --grid: #15233a;
+      --panel: rgba(6, 14, 28, 0.78);
+      --panel-border: #1d3350;
+      --lane-fill: rgba(9, 22, 40, 0.5);
+      --lane-stroke: #2c4564;
+      --text: #f5fbff;
+      --text-muted: #9eb0c7;
+      --text-dim: #52667f;
+      --text-faint: #7890ad;
+      --mask: #07101e;
+      --frontend-fill: rgba(6, 182, 212, 0.14);
+      --frontend-stroke: #67e8f9;
+      --backend-fill: rgba(16, 185, 129, 0.14);
+      --backend-stroke: #5eead4;
+      --database-fill: rgba(139, 92, 246, 0.16);
+      --database-stroke: #c4b5fd;
+      --cloud-fill: rgba(245, 158, 11, 0.13);
+      --cloud-stroke: #fcd34d;
+      --security-fill: rgba(244, 63, 94, 0.13);
+      --security-stroke: #fda4af;
+      --messagebus-fill: rgba(249, 115, 22, 0.13);
+      --messagebus-stroke: #fdba74;
+      --external-fill: rgba(71, 85, 105, 0.24);
+      --external-stroke: #a5b4c7;
+      --arrow: #7890ad;
+      --arrow-emphasis: #2dd4bf;
+      --toolbar-bg: rgba(7, 16, 30, 0.86);
+      --toolbar-border: #29415f;
+      --toolbar-menu-bg: #07101e;
+    }
+
+    [data-preset="signal-flow"][data-theme="light"] {
+      --bg: #f4f9fc;
+      --grid: #d4e5ee;
+      --panel: rgba(255, 255, 255, 0.82);
+      --panel-border: #bfd5e2;
+      --lane-fill: rgba(232, 243, 248, 0.62);
+      --lane-stroke: #a9c5d5;
+      --text: #102638;
+      --text-muted: #587287;
+      --text-dim: #8aa2b4;
+      --text-faint: #668397;
+      --mask: #ffffff;
+      --frontend-fill: rgba(6, 182, 212, 0.09);
+      --frontend-stroke: #0789a1;
+      --backend-fill: rgba(5, 150, 105, 0.09);
+      --backend-stroke: #087f69;
+      --database-fill: rgba(124, 58, 237, 0.09);
+      --database-stroke: #7254c7;
+      --cloud-fill: rgba(217, 119, 6, 0.08);
+      --cloud-stroke: #b9670b;
+      --security-fill: rgba(225, 29, 72, 0.08);
+      --security-stroke: #c53a59;
+      --messagebus-fill: rgba(234, 88, 12, 0.08);
+      --messagebus-stroke: #c65f27;
+      --external-fill: rgba(100, 116, 139, 0.1);
+      --external-stroke: #607a8c;
+      --arrow: #7b97aa;
+      --arrow-emphasis: #0d9488;
+    }
+
+    /* ==========================================================
+       BLUEPRINT — a review-first drafting preset for deployment,
+       infrastructure, and technical design documentation. It keeps
+       the same semantic palette and geometry while trading glow for
+       precise grid contrast, squared materials, and drafting marks.
+       ========================================================== */
+    [data-preset="blueprint"][data-theme="dark"] {
+      --bg: #06131f;
+      --grid: #17425a;
+      --panel: rgba(7, 27, 43, 0.9);
+      --panel-border: #27627f;
+      --lane-fill: rgba(10, 43, 66, 0.36);
+      --lane-stroke: #34799a;
+      --text: #e3f6ff;
+      --text-muted: #91b8ca;
+      --text-dim: #557e92;
+      --text-faint: #739caf;
+      --mask: #0a2031;
+      --frontend-fill: rgba(26, 157, 193, 0.14);
+      --frontend-stroke: #66d9ef;
+      --backend-fill: rgba(31, 155, 124, 0.13);
+      --backend-stroke: #69dfbd;
+      --database-fill: rgba(120, 105, 196, 0.14);
+      --database-stroke: #b4a8ff;
+      --cloud-fill: rgba(197, 145, 43, 0.13);
+      --cloud-stroke: #ffd166;
+      --security-fill: rgba(199, 76, 104, 0.13);
+      --security-stroke: #ff8da1;
+      --messagebus-fill: rgba(207, 112, 49, 0.13);
+      --messagebus-stroke: #ffad66;
+      --external-fill: rgba(84, 119, 139, 0.18);
+      --external-stroke: #a7cad9;
+      --arrow: #78a3b7;
+      --arrow-emphasis: #64dfc1;
+      --toolbar-bg: rgba(7, 28, 45, 0.92);
+      --toolbar-border: #34799a;
+      --toolbar-text: #d8f3ff;
+      --toolbar-hover: rgba(18, 58, 83, 0.95);
+      --toolbar-menu-bg: #0a2031;
+    }
+
+    [data-preset="blueprint"][data-theme="light"] {
+      --bg: #edf7fa;
+      --grid: #b5d5e1;
+      --panel: rgba(249, 253, 255, 0.94);
+      --panel-border: #78aabd;
+      --lane-fill: rgba(210, 232, 240, 0.42);
+      --lane-stroke: #83b2c4;
+      --text: #123344;
+      --text-muted: #4e7486;
+      --text-dim: #86a6b4;
+      --text-faint: #668c9d;
+      --mask: #f9fdff;
+      --frontend-fill: rgba(8, 145, 178, 0.08);
+      --frontend-stroke: #087f9c;
+      --backend-fill: rgba(5, 128, 101, 0.08);
+      --backend-stroke: #08755f;
+      --database-fill: rgba(100, 75, 180, 0.08);
+      --database-stroke: #6757a8;
+      --cloud-fill: rgba(181, 120, 15, 0.08);
+      --cloud-stroke: #a86609;
+      --security-fill: rgba(190, 48, 80, 0.07);
+      --security-stroke: #b32f50;
+      --messagebus-fill: rgba(196, 81, 22, 0.07);
+      --messagebus-stroke: #b65120;
+      --external-fill: rgba(79, 112, 128, 0.08);
+      --external-stroke: #506f7e;
+      --arrow: #6d93a5;
+      --arrow-emphasis: #087f69;
+      --toolbar-bg: rgba(247, 252, 254, 0.94);
+      --toolbar-border: #8ab5c5;
+      --toolbar-text: #294f61;
+      --toolbar-hover: #ffffff;
+      --toolbar-menu-bg: #f9fdff;
+    }
+
+    /* ==========================================================
+       EDITORIAL — a warm, publication-minded preset for design
+       reviews, launch notes, and documentation. The diagram keeps
+       the same semantic palette and exact geometry, but trades
+       software chrome for paper, ink, ruled structure, and one
+       restrained vermilion accent.
+       ========================================================== */
+    [data-preset="editorial"][data-theme="dark"] {
+      --bg: #181611;
+      --grid: #39342a;
+      --panel: rgba(35, 31, 24, 0.96);
+      --panel-border: #625a4a;
+      --lane-fill: rgba(52, 46, 35, 0.46);
+      --lane-stroke: #726957;
+      --text: #f4eddf;
+      --text-muted: #b9ae9b;
+      --text-dim: #776e60;
+      --text-faint: #9d917e;
+      --mask: #231f18;
+      --frontend-fill: rgba(43, 133, 142, 0.16);
+      --frontend-stroke: #7fc6c7;
+      --backend-fill: rgba(63, 132, 92, 0.16);
+      --backend-stroke: #8fc29e;
+      --database-fill: rgba(117, 91, 141, 0.17);
+      --database-stroke: #c0a4d0;
+      --cloud-fill: rgba(170, 119, 49, 0.16);
+      --cloud-stroke: #d8ad68;
+      --security-fill: rgba(157, 69, 65, 0.17);
+      --security-stroke: #df9085;
+      --messagebus-fill: rgba(174, 79, 42, 0.16);
+      --messagebus-stroke: #df946f;
+      --external-fill: rgba(126, 115, 96, 0.18);
+      --external-stroke: #b8ad99;
+      --arrow: #948978;
+      --arrow-emphasis: #dd6b3d;
+      --toolbar-bg: rgba(35, 31, 24, 0.92);
+      --toolbar-border: #625a4a;
+      --toolbar-text: #eee5d5;
+      --toolbar-hover: #302a20;
+      --toolbar-menu-bg: #231f18;
+    }
+
+    [data-preset="editorial"][data-theme="light"] {
+      --bg: #f2eee5;
+      --grid: #d8d0c2;
+      --panel: rgba(251, 248, 241, 0.97);
+      --panel-border: #c4b9a6;
+      --lane-fill: rgba(229, 221, 207, 0.42);
+      --lane-stroke: #b8aa94;
+      --text: #242018;
+      --text-muted: #6f6658;
+      --text-dim: #a09788;
+      --text-faint: #817767;
+      --mask: #fbf8f1;
+      --frontend-fill: rgba(31, 117, 126, 0.09);
+      --frontend-stroke: #287e84;
+      --backend-fill: rgba(42, 119, 75, 0.09);
+      --backend-stroke: #397b53;
+      --database-fill: rgba(105, 75, 130, 0.09);
+      --database-stroke: #765d86;
+      --cloud-fill: rgba(157, 103, 31, 0.1);
+      --cloud-stroke: #9a671f;
+      --security-fill: rgba(153, 58, 52, 0.09);
+      --security-stroke: #9e463f;
+      --messagebus-fill: rgba(182, 70, 27, 0.09);
+      --messagebus-stroke: #ad4b25;
+      --external-fill: rgba(101, 91, 75, 0.09);
+      --external-stroke: #746b5e;
+      --arrow: #8a806f;
+      --arrow-emphasis: #bb4c23;
+      --toolbar-bg: rgba(251, 248, 241, 0.94);
+      --toolbar-border: #c4b9a6;
+      --toolbar-text: #40392f;
+      --toolbar-hover: #fffdf8;
+      --toolbar-menu-bg: #fbf8f1;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, 'DejaVu Sans Mono', 'Liberation Mono', 'Noto Sans Mono CJK SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', monospace;
+      background: var(--bg);
+      min-height: 100vh;
+      padding: 2rem;
+      color: var(--text);
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    html[data-preset="signal-flow"] body {
+      background-image:
+        radial-gradient(circle at 18% -8%, rgba(34, 211, 238, 0.14), transparent 34rem),
+        radial-gradient(circle at 92% 18%, rgba(139, 92, 246, 0.12), transparent 30rem);
+      background-attachment: fixed;
+    }
+    html[data-preset="signal-flow"][data-theme="light"] body {
+      background-image:
+        radial-gradient(circle at 18% -8%, rgba(6, 182, 212, 0.12), transparent 34rem),
+        radial-gradient(circle at 92% 18%, rgba(139, 92, 246, 0.08), transparent 30rem);
+    }
+    html[data-preset="blueprint"] body {
+      background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size: 32px 32px;
+      background-position: -1px -1px;
+      background-attachment: fixed;
+    }
+    html[data-preset="editorial"] body {
+      background-image:
+        linear-gradient(90deg, transparent 0, transparent 5.4rem, color-mix(in srgb, var(--security-stroke) 18%, transparent) 5.4rem, color-mix(in srgb, var(--security-stroke) 18%, transparent) calc(5.4rem + 1px), transparent calc(5.4rem + 1px)),
+        repeating-linear-gradient(0deg, transparent 0, transparent 31px, color-mix(in srgb, var(--grid) 36%, transparent) 31px, color-mix(in srgb, var(--grid) 36%, transparent) 32px);
+      background-attachment: fixed;
+    }
+
+    /* Gallery/embed mode keeps the generated artifact as the source of truth
+       while presenting only its diagram surface inside a proof card. */
+    html[data-embed="true"] body {
+      min-height: 0;
+      padding: 0;
+      overflow: hidden;
+      background: var(--bg);
+      background-image: none;
+    }
+    html[data-embed="true"] .toolbar,
+    html[data-embed="true"] .header,
+    html[data-embed="true"] .cards,
+    html[data-embed="true"] .diagram-nav,
+    html[data-embed="true"] .overview-map,
+    html[data-embed="true"] .focus-chip,
+    html[data-embed="true"] .route-probe,
+    html[data-embed="true"] .semantic-lens,
+    html[data-embed="true"] .diagram-guide,
+    html[data-embed="true"] .node-finder,
+    html[data-embed="true"] .guided-views { display: none !important; }
+    html[data-embed="true"] .container { max-width: none; }
+    html[data-embed="true"] .diagram-container {
+      padding: 0.5rem;
+      border: 0;
+      border-radius: 0;
+      box-shadow: none;
+    }
+    html[data-embed="true"] .diagram-container svg { min-width: 0; }
+
+    /* Share Chapter Cue lives in the HTML viewer layer, not inside the SVG.
+       It gives one-shot embeds a title, authored note, truthful stop order,
+       and lifecycle state while canonical diagram geometry stays untouched. */
+    .share-chapter-cue { display: none; }
+    html[data-embed="true"][data-share-playback="true"] .share-chapter-cue:not([hidden]),
+    html[data-embed="true"][data-share-moment="true"] .share-chapter-cue:not([hidden]) {
+      position: absolute;
+      z-index: 18;
+      top: 0.85rem;
+      left: 50%;
+      display: grid;
+      grid-template-columns: auto minmax(9rem, 13.5rem) minmax(0, 1fr);
+      align-items: center;
+      gap: 0.45rem 0.85rem;
+      width: min(52rem, calc(100% - 1.5rem));
+      min-height: 3.35rem;
+      padding: 0.55rem 0.75rem 0.65rem;
+      overflow: hidden;
+      border: 1px solid color-mix(in srgb, var(--frontend-stroke) 42%, var(--toolbar-border));
+      border-radius: 0.75rem;
+      background:
+        linear-gradient(115deg, color-mix(in srgb, var(--frontend-fill) 52%, transparent), transparent 45%),
+        color-mix(in srgb, var(--toolbar-menu-bg) 92%, transparent);
+      color: var(--toolbar-text);
+      box-shadow: 0 14px 42px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.045);
+      backdrop-filter: blur(16px);
+      pointer-events: none;
+      animation: archify-share-cue-enter 280ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    html[data-preset="blueprint"] .share-chapter-cue {
+      border-radius: 0.2rem;
+      background:
+        linear-gradient(90deg, color-mix(in srgb, var(--frontend-fill) 46%, transparent), transparent 36%),
+        var(--toolbar-menu-bg);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.2);
+      backdrop-filter: none;
+    }
+    html[data-preset="editorial"] .share-chapter-cue {
+      border-color: var(--panel-border);
+      background:
+        linear-gradient(90deg, color-mix(in srgb, var(--security-fill) 58%, transparent), transparent 42%),
+        var(--toolbar-menu-bg);
+      box-shadow: 0 10px 30px color-mix(in srgb, #000 18%, transparent);
+      backdrop-filter: none;
+    }
+    html[data-preset="editorial"] .share-chapter-state { color: var(--arrow-emphasis); }
+    html[data-preset="editorial"] .share-chapter-state::before {
+      border-radius: 0;
+      box-shadow: none;
+      transform: rotate(45deg) scale(0.8);
+    }
+    .share-chapter-index {
+      display: grid;
+      gap: 0.12rem;
+      min-width: 5rem;
+      padding-right: 0.75rem;
+      border-right: 1px solid var(--toolbar-border);
+    }
+    .share-chapter-state {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.36rem;
+      color: var(--frontend-stroke);
+      font-size: 0.5rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .share-chapter-state::before {
+      width: 0.38rem;
+      height: 0.38rem;
+      border-radius: 50%;
+      background: currentColor;
+      box-shadow: 0 0 10px currentColor;
+      content: '';
+    }
+    .share-chapter-cue[data-state="playing"] .share-chapter-state::before {
+      animation: archify-share-cue-pulse 1.15s ease-in-out infinite;
+    }
+    .share-chapter-count {
+      color: var(--text-faint);
+      font-size: 0.5rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .share-chapter-copy { min-width: 0; }
+    .share-chapter-copy strong,
+    .share-chapter-copy small,
+    .share-chapter-route {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .share-chapter-copy strong {
+      color: var(--toolbar-text);
+      font-size: 0.6875rem;
+      line-height: 1.35;
+    }
+    .share-chapter-copy small {
+      margin-top: 0.08rem;
+      color: var(--text-muted);
+      font-size: 0.5rem;
+      line-height: 1.35;
+    }
+    .share-chapter-route {
+      color: color-mix(in srgb, var(--frontend-stroke) 76%, var(--text-muted));
+      font-size: 0.5625rem;
+      font-weight: 650;
+      letter-spacing: 0.015em;
+      text-align: right;
+    }
+    .share-chapter-progress {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: 2px;
+      overflow: hidden;
+      background: color-mix(in srgb, var(--toolbar-border) 72%, transparent);
+    }
+    .share-chapter-progress span {
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--frontend-stroke), var(--database-stroke));
+      box-shadow: 0 0 12px var(--frontend-stroke);
+      transform: scaleX(0);
+      transform-origin: left center;
+    }
+
+    /* Presentation Stage is a viewer-only layer: it gives the live diagram
+       the viewport while keeping guided views, theme, focus, and exports real.
+       Embed mode wins when both query parameters are present. */
+    html[data-present="true"]:not([data-embed="true"]) body {
+      height: 100dvh;
+      min-height: 0;
+      padding: 1rem;
+      overflow: hidden;
+    }
+    html[data-present="true"]:not([data-embed="true"]) .container {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      width: 100%;
+      max-width: none;
+      height: calc(100dvh - 2rem);
+    }
+    html[data-present="true"]:not([data-embed="true"]) .header {
+      flex: none;
+      min-width: 0;
+      margin: 0;
+      padding-right: 23rem;
+    }
+    html[data-present="true"]:not([data-embed="true"]) .header-row { margin-bottom: 0.25rem; }
+    html[data-present="true"]:not([data-embed="true"]) .subtitle {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    html[data-present="true"]:not([data-embed="true"]) .guided-views {
+      flex: none;
+      margin-bottom: 0;
+    }
+    html[data-present="true"]:not([data-embed="true"]) .diagram-container {
+      display: flex;
+      flex: 1 1 auto;
+      align-items: center;
+      justify-content: center;
+      min-height: 0;
+      padding: 0.75rem;
+      padding-bottom: calc(0.75rem + var(--archify-nav-reserve));
+    }
+    html[data-present="true"]:not([data-embed="true"]) .diagram-container > svg {
+      width: 100%;
+      height: 100%;
+      min-width: 0;
+    }
+    html[data-present="true"]:not([data-embed="true"]) .cards { display: none; }
+    html[data-present="true"]:not([data-embed="true"]) #btn-present {
+      border-color: var(--frontend-stroke);
+      color: var(--frontend-stroke);
+    }
+
+    /* The reader owns only the outer scale. Wide diagrams keep one authored
+       SVG/viewBox while the runtime chooses a desktop width from the actual
+       vertical budget. This avoids device-specific files and breakpoint
+       jumps between a laptop and a tall monitor. */
+    .container {
+      width: 100%;
+      max-width: var(--archify-reader-width, 1440px);
+      margin: 0 auto;
+    }
+    @media (min-width: 768px) and (max-height: 920px) {
+      .header { margin-bottom: 1rem; }
+      .diagram-container { padding: 1rem; }
+      .cards { margin-top: 1rem; }
+      .card { padding: 1rem; }
+    }
+
+    .header { margin-bottom: 1.5rem; padding-right: 29.5rem; }
+
+    html[data-preset="signal-flow"] .header,
+    html[data-preset="blueprint"] .header,
+    html[data-preset="editorial"] .header { padding-right: 29.5rem; }
+
+    .header-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .pulse-dot {
+      width: 12px;
+      height: 12px;
+      background: var(--frontend-stroke);
+      border-radius: 50%;
+      animation: none;
+    }
+
+    html[data-motion-capable="true"] .pulse-dot { animation: pulse 2s infinite; }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      margin-left: 1.75rem;
+    }
+
+    html[data-preset="signal-flow"] .header-row::after {
+      content: "SIGNAL FLOW";
+      margin-left: auto;
+      color: var(--frontend-stroke);
+      border: 1px solid var(--frontend-stroke);
+      border-radius: 999px;
+      padding: 0.28rem 0.6rem;
+      font-size: 0.625rem;
+      letter-spacing: 0.12em;
+      opacity: 0.82…155574 tokens truncated…lectedKinds[0]) + ': ' + reverse + ' · ' +
+            total + ' direct relationship' + (total === 1 ? '' : 's');
+        } else {
+          var nodeCount = collectKinds().filter(function (kind) { return kind.id === selectedKinds[0]; })[0].nodes.length;
+          status.textContent = nodeCount + ' ' + kindLabel(selectedKinds[0]) + ' node' + (nodeCount === 1 ? '' : 's') + ' · ' +
+            touching + ' touching relationship' + (touching === 1 ? '' : 's') + ' · connected peers remain visible';
+        }
+        updateTrigger();
+        renderKinds();
+        dockPanel(byId);
+        if (options.updateUrl !== false) updateHash();
+        return true;
+      }
+      function prepareForLens() {
+        clearLegendPreview();
+        if (Archify.focus && typeof Archify.focus.clear === 'function') {
+          Archify.focus.clear({ updateUrl: false, preserveView: true });
+        }
+        if (Archify.routeProbe && typeof Archify.routeProbe.clear === 'function') {
+          Archify.routeProbe.clear({ updateUrl: false, restoreFocus: false });
+        }
+        if (Archify.guidedViews && typeof Archify.guidedViews.showAll === 'function') {
+          Archify.guidedViews.showAll({ clearFocus: false, updateUrl: false });
+        }
+        if (Archify.intentTrace && typeof Archify.intentTrace.clear === 'function') {
+          Archify.intentTrace.clear({ announce: false });
+        }
+      }
+      function select(kind, options) {
+        options = options || {};
+        clearLegendPreview();
+        var exists = collectKinds().some(function (entry) { return entry.id === kind; });
+        if (!exists) return false;
+        var index = selectedKinds.indexOf(kind);
+        if (index >= 0) selectedKinds.splice(index, 1);
+        else {
+          if (selectedKinds.length >= 2) return false;
+          if (!selectedKinds.length) prepareForLens();
+          selectedKinds.push(kind);
+        }
+        return applySelection(options);
+      }
+      function close(options) {
+        options = options || {};
+        panel.hidden = true;
+        trigger.setAttribute('aria-expanded', 'false');
+        updateTrigger();
+        if (options.restoreFocus !== false && lensOpener && typeof lensOpener.focus === 'function') lensOpener.focus();
+        return false;
+      }
+      function open(options) {
+        options = options || {};
+        if (html.getAttribute('data-embed') === 'true') return false;
+        lensOpener = options.opener || trigger;
+        if (Archify.exportMenu && Archify.exportMenu.isOpen()) Archify.exportMenu.close(false);
+        if (Archify.finder && Archify.finder.isOpen()) Archify.finder.close({ restoreFocus: false });
+        if (Archify.radar && Archify.radar.isOpen()) Archify.radar.close({ restoreFocus: false });
+        if (Archify.guide && Archify.guide.isOpen()) Archify.guide.close({ restoreFocus: false });
+        renderKinds();
+        panel.hidden = false;
+        trigger.setAttribute('aria-expanded', 'true');
+        updateTrigger();
+        requestAnimationFrame(function () {
+          dockPanel(nodesById());
+          var activeButton = kindsRoot.querySelector('[aria-pressed="true"]');
+          var firstButton = activeButton || kindsRoot.querySelector('button:not(:disabled)');
+          if (firstButton) firstButton.focus();
+        });
+        return true;
+      }
+      function toggle() { return panel.hidden ? open({ opener: trigger }) : close(); }
+      function clear(options) {
+        options = options || {};
+        selectedKinds = [];
+        cleanSvgState();
+        panel.removeAttribute('data-dock-side');
+        updateTrigger();
+        renderKinds();
+        status.textContent = 'Choose a kind to inspect its nodes and touching relationships.';
+        if (options.updateUrl !== false) updateHash();
+        if (options.preserveView !== true && Archify.view && typeof Archify.view.reset === 'function') {
+          Archify.view.reset({ automatic: true });
+        }
+        if (options.closePanel === true) close({ restoreFocus: false });
+        return false;
+      }
+      function fallbackCopy(value) {
+        var field = document.createElement('textarea');
+        field.value = value;
+        field.setAttribute('readonly', '');
+        field.style.position = 'fixed';
+        field.style.opacity = '0';
+        document.body.appendChild(field);
+        field.select();
+        var copied = false;
+        try { copied = document.execCommand('copy'); } catch (_) {}
+        field.remove();
+        return copied;
+      }
+      function copyLink() {
+        if (!selectedKinds.length) return Promise.resolve(false);
+        var value = location.href.replace(/#.*$/, '') + '#lens=' + selectedKinds.map(encodeURIComponent).join('~');
+        var copy = navigator.clipboard && typeof navigator.clipboard.writeText === 'function'
+          ? navigator.clipboard.writeText(value).then(function () { return true; }).catch(function () { return fallbackCopy(value); })
+          : Promise.resolve(fallbackCopy(value));
+        return copy.then(function (copied) {
+          copyBtn.textContent = copied ? 'Copied' : 'Copy failed';
+          window.setTimeout(function () { copyBtn.textContent = 'Copy link'; }, 1600);
+          return copied;
+        });
+      }
+      function syncFromHash() {
+        try {
+          var params = new URLSearchParams(location.hash.replace(/^#/, ''));
+          var value = params.get('lens');
+          if (!value) {
+            if (selectedKinds.length) clear({ updateUrl: false, preserveView: true });
+            return;
+          }
+          var available = collectKinds().map(function (kind) { return kind.id; });
+          var requested = value.split('~').filter(function (kind, index, list) {
+            return available.indexOf(kind) >= 0 && list.indexOf(kind) === index;
+          }).slice(0, 2);
+          if (!requested.length) return;
+          prepareForLens();
+          selectedKinds = requested;
+          applySelection({ updateUrl: false });
+        } catch (_) {}
+      }
+
+      trigger.addEventListener('click', toggle);
+      if (decorateLegendBridge()) {
+        legendBridge.addEventListener('click', function (event) {
+          var entry = event.target.closest('[data-legend-kind][role="button"]');
+          if (entry) activateLegendEntry(entry);
+        });
+        legendBridge.addEventListener('pointerover', function (event) {
+          if (event.pointerType === 'touch' || (finePointerQuery && !finePointerQuery.matches)) return;
+          var entry = event.target.closest('[data-legend-kind][role="button"]');
+          if (!entry || (event.relatedTarget && entry.contains(event.relatedTarget))) return;
+          hoveredLegendEntry = entry;
+          syncLegendPreview();
+        });
+        legendBridge.addEventListener('pointerout', function (event) {
+          var entry = event.target.closest('[data-legend-kind][role="button"]');
+          if (!entry || (event.relatedTarget && entry.contains(event.relatedTarget))) return;
+          if (hoveredLegendEntry === entry) hoveredLegendEntry = null;
+          syncLegendPreview();
+        });
+        legendBridge.addEventListener('focusin', function (event) {
+          var entry = event.target.closest('[data-legend-kind][role="button"]');
+          if (!entry) return;
+          focusedLegendEntry = entry;
+          legendEntries.forEach(function (candidate) {
+            candidate.setAttribute('tabindex', candidate === entry ? '0' : '-1');
+          });
+          syncLegendPreview();
+        });
+        legendBridge.addEventListener('focusout', function (event) {
+          var entry = event.target.closest('[data-legend-kind][role="button"]');
+          if (!entry || (event.relatedTarget && entry.contains(event.relatedTarget))) return;
+          if (focusedLegendEntry === entry) focusedLegendEntry = null;
+          syncLegendPreview();
+        });
+        legendBridge.addEventListener('keydown', function (event) {
+          var entry = event.target.closest('[data-legend-kind][role="button"]');
+          if (!entry) return;
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            activateLegendEntry(entry);
+            return;
+          }
+          var index = legendEntries.indexOf(entry);
+          var next = null;
+          if (event.key === 'ArrowRight') next = (index + 1) % legendEntries.length;
+          else if (event.key === 'ArrowLeft') next = (index - 1 + legendEntries.length) % legendEntries.length;
+          else if (event.key === 'Home') next = 0;
+          else if (event.key === 'End') next = legendEntries.length - 1;
+          if (next === null) return;
+          event.preventDefault();
+          legendEntries.forEach(function (candidate, candidateIndex) {
+            candidate.setAttribute('tabindex', candidateIndex === next ? '0' : '-1');
+          });
+          legendEntries[next].focus();
+        });
+      }
+      closeBtn.addEventListener('click', function () { close(); });
+      clearBtn.addEventListener('click', function () { clear({ preserveView: true }); });
+      copyBtn.addEventListener('click', copyLink);
+      kindsRoot.addEventListener('click', function (event) {
+        var button = event.target.closest('[data-kind]');
+        if (!button || button.disabled) return;
+        select(button.getAttribute('data-kind'));
+      });
+      kindsRoot.addEventListener('keydown', function (event) {
+        var buttons = Array.prototype.slice.call(kindsRoot.querySelectorAll('button:not(:disabled)'));
+        var index = buttons.indexOf(document.activeElement);
+        var next = null;
+        if (index >= 0 && (event.key === 'ArrowRight' || event.key === 'ArrowDown')) next = (index + 1) % buttons.length;
+        else if (index >= 0 && (event.key === 'ArrowLeft' || event.key === 'ArrowUp')) next = (index - 1 + buttons.length) % buttons.length;
+        else if (event.key === 'Home' && buttons.length) next = 0;
+        else if (event.key === 'End' && buttons.length) next = buttons.length - 1;
+        if (next !== null) { event.preventDefault(); buttons[next].focus(); }
+      });
+      panel.addEventListener('keydown', function (event) {
+        if (event.key !== 'Escape') return;
+        event.preventDefault();
+        event.stopPropagation();
+        close();
+      });
+      document.addEventListener('click', function (event) {
+        var eventPath = typeof event.composedPath === 'function' ? event.composedPath() : [];
+        var clickedInside = eventPath.indexOf(panel) >= 0 || panel.contains(event.target);
+        var clickedLauncher = event.target === trigger || legendEntries.some(function (entry) {
+          return event.target === entry || entry.contains(event.target);
+        });
+        if (!panel.hidden && !clickedInside && !clickedLauncher) close({ restoreFocus: false });
+      });
+      window.addEventListener('hashchange', syncFromHash);
+      window.addEventListener('resize', function () {
+        if (!panel.hidden && selectedKinds.length) dockPanel(nodesById());
+        layoutLegendBridge();
+      });
+      renderKinds();
+      syncFromHash();
+
+      return {
+        open: open,
+        close: close,
+        toggle: toggle,
+        clear: clear,
+        clearPreview: clearLegendPreview,
+        select: select,
+        copyLink: copyLink,
+        isOpen: function () { return !panel.hidden; },
+        active: function () { return selectedKinds.length ? selectedKinds.slice() : null; },
+        kinds: function () { return collectKinds().map(function (kind) { return { id: kind.id, count: kind.nodes.length }; }); }
+      };
+    })();
+
+    /* ============================================================
+       Diagram Guide — a factual command deck over existing interactions.
+       Counts come from compiled semantics; actions delegate to Finder, Route
+       Probe, Semantic Radar, Semantic Lens, Story Trail, Presentation, theme, export, and
+       camera without adding a second command implementation or SVG state.
+       ============================================================ */
+    Archify.guide = (function () {
+      var html = document.documentElement;
+      var container = document.querySelector('.diagram-container');
+      var svg = container.querySelector(':scope > svg');
+      var trigger = document.getElementById('btn-diagram-guide');
+      var panel = document.getElementById('diagram-guide');
+      var closeBtn = document.getElementById('diagram-guide-close');
+      var stats = document.getElementById('diagram-guide-stats');
+      var actions = document.getElementById('diagram-guide-actions');
+      var feedback = document.getElementById('diagram-guide-feedback');
+      var storyBtn = actions.querySelector('[data-guide-action="story"]');
+      var storyCopy = document.getElementById('diagram-guide-story-copy');
+      var routePanel = document.getElementById('route-probe');
+
+      function viewCount() {
+        return Archify.guidedViews && Number(Archify.guidedViews.count) || 0;
+      }
+      function relationshipCount() {
+        var seen = {};
+        Array.prototype.forEach.call(svg.querySelectorAll('[data-edge-from][data-edge-to]'), function (edge) {
+          var key = edge.getAttribute('data-edge-key') || [
+            edge.getAttribute('data-edge-from'),
+            edge.getAttribute('data-edge-to'),
+            edge.getAttribute('data-edge-label') || ''
+          ].join('\u0000');
+          seen[key] = true;
+        });
+        return Object.keys(seen).length;
+      }
+      function renderFacts() {
+        var nodes = svg.querySelectorAll('[data-node-id]').length;
+        var relationships = relationshipCount();
+        var views = viewCount();
+        stats.textContent = nodes + ' semantic node' + (nodes === 1 ? '' : 's') + ' · ' +
+          relationships + ' relationship' + (relationships === 1 ? '' : 's') + ' · ' +
+          views + ' guided view' + (views === 1 ? '' : 's');
+        storyBtn.disabled = views === 0;
+        storyBtn.setAttribute('aria-disabled', views === 0 ? 'true' : 'false');
+        storyCopy.textContent = views
+          ? 'Walk ' + views + ' authored chapter' + (views === 1 ? '' : 's') + ' and their real relationships.'
+          : 'No authored guided story in this diagram.';
+      }
+      function actionButtons() {
+        return Array.prototype.slice.call(actions.querySelectorAll('.diagram-guide-action:not(:disabled)'));
+      }
+      function close(options) {
+        options = options || {};
+        panel.hidden = true;
+        html.removeAttribute('data-guide-open');
+        routePanel.removeAttribute('data-guide-open');
+        trigger.setAttribute('aria-expanded', 'false');
+        trigger.setAttribute('aria-label', 'Open diagram guide');
+        feedback.textContent = '';
+        if (options.restoreFocus !== false) trigger.focus();
+        return false;
+      }
+      function open() {
+        if (html.getAttribute('data-embed') === 'true') return false;
+        if (Archify.semanticLens && typeof Archify.semanticLens.clearPreview === 'function') Archify.semanticLens.clearPreview();
+        if (Archify.exportMenu && Archify.exportMenu.isOpen()) Archify.exportMenu.close(false);
+        if (Archify.finder && Archify.finder.isOpen()) Archify.finder.close({ restoreFocus: false });
+        if (Archify.radar && Archify.radar.isOpen()) Archify.radar.close({ restoreFocus: false });
+        if (Archify.semanticLens && Archify.semanticLens.isOpen()) Archify.semanticLens.close({ restoreFocus: false });
+        if (Archify.guidedViews && Archify.guidedViews.isPlaying && Archify.guidedViews.isPlaying()) {
+          Archify.guidedViews.pause();
+        }
+        if (Archify.routeProbe && Archify.routeProbe.isJourneyPlaying && Archify.routeProbe.isJourneyPlaying()) {
+          Archify.routeProbe.pauseJourney({ preserveElapsed: true, reason: 'guide' });
+        }
+        renderFacts();
+        panel.hidden = false;
+        html.setAttribute('data-guide-open', 'true');
+        routePanel.setAttribute('data-guide-open', 'true');
+        trigger.setAttribute('aria-expanded', 'true');
+        trigger.setAttribute('aria-label', 'Close diagram guide');
+        feedback.textContent = '';
+        requestAnimationFrame(function () {
+          var first = actionButtons()[0];
+          if (first) first.focus();
+        });
+        return true;
+      }
+      function toggle() { return panel.hidden ? open() : close(); }
+      function execute(action) {
+        feedback.textContent = '';
+        if (action === 'story' && !viewCount()) {
+          feedback.textContent = 'This diagram has no authored guided story.';
+          return false;
+        }
+        close({ restoreFocus: false });
+        if (action === 'find') return Archify.finder.open();
+        if (action === 'route') return Archify.routeProbe.begin({ focusNode: true });
+        if (action === 'map') return Archify.radar.open();
+        if (action === 'lens') return Archify.semanticLens.open();
+        if (action === 'story') return Archify.guidedViews.play();
+        if (action === 'present') return Archify.presentation.enter();
+        if (action === 'export') return Archify.exportMenu.open();
+        if (action === 'theme') return Archify.theme.toggle();
+        if (action === 'preset') return Archify.preset.cycle();
+        if (action === 'reset') return Archify.view.reset();
+        if (action === 'zoom-in') return Archify.view.zoomIn();
+        if (action === 'zoom-out') return Archify.view.zoomOut();
+        return false;
+      }
+      function actionForKey(key) {
+        return {
+          '/': 'find',
+          r: 'route',
+          m: 'map',
+          l: 'lens',
+          p: 'story',
+          f: 'present',
+          e: 'export',
+          t: 'theme',
+          s: 'preset',
+          '0': 'reset',
+          '+': 'zoom-in',
+          '=': 'zoom-in',
+          '-': 'zoom-out'
+        }[key] || null;
+      }
+
+      trigger.addEventListener('click', toggle);
+      closeBtn.addEventListener('click', function () { close(); });
+      actions.addEventListener('click', function (event) {
+        var button = event.target.closest('[data-guide-action]');
+        if (!button || button.disabled) return;
+        event.stopPropagation();
+        execute(button.getAttribute('data-guide-action'));
+      });
+      panel.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' || event.key === '?') {
+          event.preventDefault();
+          event.stopPropagation();
+          close();
+          return;
+        }
+        var buttons = actionButtons();
+        var index = buttons.indexOf(document.activeElement);
+        var next = null;
+        if (index >= 0 && event.key === 'ArrowRight') next = (index + 1) % buttons.length;
+        else if (index >= 0 && event.key === 'ArrowDown') next = (index + 1) % buttons.length;
+        else if (index >= 0 && event.key === 'ArrowLeft') next = (index - 1 + buttons.length) % buttons.length;
+        else if (index >= 0 && event.key === 'ArrowUp') next = (index - 1 + buttons.length) % buttons.length;
+        else if (event.key === 'Home' && buttons.length) next = 0;
+        else if (event.key === 'End' && buttons.length) next = buttons.length - 1;
+        if (next !== null) {
+          event.preventDefault();
+          event.stopPropagation();
+          buttons[next].focus();
+          return;
+        }
+        var action = actionForKey(event.key.length === 1 ? event.key.toLowerCase() : event.key);
+        if (!action) return;
+        event.preventDefault();
+        event.stopPropagation();
+        execute(action);
+      });
+      document.addEventListener('click', function (event) {
+        if (!panel.hidden && !panel.contains(event.target) && event.target !== trigger) close({ restoreFocus: false });
+      });
+
+      renderFacts();
+      return {
+        open: open,
+        close: close,
+        toggle: toggle,
+        execute: execute,
+        isOpen: function () { return !panel.hidden; },
+        facts: function () {
+          return {
+            nodes: svg.querySelectorAll('[data-node-id]').length,
+            relationships: relationshipCount(),
+            views: viewCount()
+          };
+        }
+      };
+    })();
+
+    /* ============================================================
+       Global keyboard shortcuts
+       ? -> open Diagram Guide
+       T -> toggle theme
+       S -> cycle visual style
+       E -> open export menu
+         F -> toggle presentation stage
+         M -> toggle Semantic Radar
+         L -> toggle Semantic Lens
+         R -> start/clear Route Probe
+         / -> open node finder or the active route endpoint picker
+         + / - -> zoom, 0 -> reset view
+         Escape -> clear temporary trace/focus/view first, then exit presentation
+       Ignored when focus is inside an input/textarea/contenteditable.
+       ============================================================ */
+    document.addEventListener('keydown', function (e) {
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      if (e.defaultPrevented) return;
+      var t = e.target;
+      if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+      if (Archify.preset && Archify.preset.isOpen() && e.key !== 'Escape' && e.key !== 's' && e.key !== 'S') {
+        Archify.preset.close(false);
+      }
+      if (e.key === '?') {
+        e.preventDefault();
+        Archify.guide.toggle();
+      } else if (e.key === '/') {
+        e.preventDefault();
+        Archify.finder.open();
+      } else if (e.key === 't' || e.key === 'T') {
+        e.preventDefault();
+        Archify.theme.toggle();
+      } else if (e.key === 's' || e.key === 'S') {
+        e.preventDefault();
+        Archify.preset.cycle();
+      } else if (e.key === 'e' || e.key === 'E') {
+        e.preventDefault();
+        if (!Archify.exportMenu.isOpen()) Archify.exportMenu.open();
+      } else if (e.key === 'f' || e.key === 'F') {
+        e.preventDefault();
+        Archify.presentation.toggle();
+      } else if (e.key === 'm' || e.key === 'M') {
+        e.preventDefault();
+        Archify.radar.toggle();
+      } else if (e.key === 'l' || e.key === 'L') {
+        e.preventDefault();
+        Archify.semanticLens.toggle();
+      } else if (e.key === 'r' || e.key === 'R') {
+        e.preventDefault();
+        Archify.routeProbe.toggle({ focusNode: true });
+      } else if (e.key === '+' || e.key === '=') {
+        e.preventDefault();
+        Archify.view.zoomIn();
+      } else if (e.key === '-') {
+        e.preventDefault();
+        Archify.view.zoomOut();
+      } else if (e.key === '0') {
+        e.preventDefault();
+        Archify.view.reset();
+      } else if (e.key === 'Escape' && Archify.preset.isOpen()) {
+        e.preventDefault();
+        Archify.preset.close(true);
+      } else if (e.key === 'Escape' && Archify.semanticLens.isOpen()) {
+        e.preventDefault();
+        Archify.semanticLens.close({ restoreFocus: true });
+      } else if (e.key === 'Escape' && Archify.semanticLens.active()) {
+        e.preventDefault();
+        Archify.semanticLens.clear({ preserveView: true });
+      } else if (e.key === 'Escape' && Archify.guide.isOpen()) {
+        e.preventDefault();
+        Archify.guide.close({ restoreFocus: true });
+      } else if (e.key === 'Escape' && Archify.radar.isOpen()) {
+        e.preventDefault();
+        Archify.radar.close({ restoreFocus: true });
+      } else if (e.key === 'Escape' && Archify.routeProbe.active()) {
+        e.preventDefault();
+        Archify.routeProbe.escape({ restoreFocus: true });
+      } else if (e.key === 'Escape' && Archify.intentTrace.active()) {
+        e.preventDefault();
+        Archify.intentTrace.clear();
+      } else if (e.key === 'Escape' && Archify.focus.active()) {
+        e.preventDefault();
+        Archify.focus.clear({ restoreFocus: true });
+      } else if (e.key === 'Escape' && Archify.presentation.active()) {
+        e.preventDefault();
+        Archify.presentation.exit();
+      }
+    });
+  </script>
+</body>
+</html>
+
