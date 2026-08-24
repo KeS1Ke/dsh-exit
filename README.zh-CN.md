@@ -1,26 +1,111 @@
+<div align="center">
+
 # dsh-exit
 
-[English](README.md) | **简体中文**
+**为 DeepSeek Harness Web 界面提供一个明确、可确认的退出控制。**
 
-一个 [DeepSeek Harness](https://npmjs.com/package/@deepseek-ai/dsh)（dsh）web 插件：在整个界面右下角增加一个悬浮**退出**按钮，只负责退出 dsh 并释放端口。
+[![dsh Web 插件](https://img.shields.io/badge/dsh-Web%20%E6%8F%92%E4%BB%B6-4f46e5?style=for-the-badge)](https://npmjs.com/package/@deepseek-ai/dsh)
+[![平台](https://img.shields.io/badge/%E5%B9%B3%E5%8F%B0-Web-0ea5e9?style=for-the-badge)](https://github.com/KeS1Ke/dsh-exit)
+[![版本](https://img.shields.io/badge/%E7%89%88%E6%9C%AC-0.1.0-64748b?style=for-the-badge)](package.json)
+[![依赖](https://img.shields.io/badge/%E8%BF%90%E8%A1%8C%E6%97%B6%E4%BE%9D%E8%B5%96-%E6%97%A0-16a34a?style=for-the-badge)](package.json)
 
-## 功能
+**简体中文** | [English](README.md)
 
-- 在整个界面右下角放置紧凑的圆形**退出**按钮（红色电源图标——与 archive-manager"删除会话"同一个红，图标用 [Lucide `power`](https://lucide.dev/icons/power)，ISC 免费许可）。
-- 首次点击弹出确认弹窗；再次确认后：
-  1. 结束 dsh 宿主进程——其占用的所有端口（默认 `127.0.0.1:3080`）随之释放；
-  2. 保留宿主终端窗口和当前浏览器标签页，不执行额外关闭操作。
+</div>
 
-## 本地安装（未发布）
+> [!IMPORTANT]
+> 确认退出后会结束 dsh 宿主进程并释放其占用的端口；宿主终端窗口和当前浏览器标签页会被刻意保留。
+
+## ✨ 功能概览
+
+`dsh-exit` 在 dsh Web 界面右下角增加一个紧凑的悬浮**退出**按钮。
+
+- 先弹出确认弹窗，确认前不会执行退出动作。
+- 确认后调用类型化的 `dshExit/exit` Remote 方法。
+- 先返回调用应答，再等待短暂窗口结束宿主进程。
+- 释放该进程占用的全部端口，包括常见的 `127.0.0.1:3080`。
+- 保留宿主终端窗口和浏览器标签页，方便后续操作。
+- 使用 dsh 现有设计令牌与 Lucide `power` 电源图标。
+
+## 🧭 退出流程
+
+```mermaid
+flowchart LR
+    A["右下角悬浮退出按钮"] --> B["确认弹窗"]
+    B -->|取消 / Esc| C["继续使用 dsh"]
+    B -->|确认退出| D["remote.dshExit.exit()"]
+    D --> E["返回调用应答"]
+    E --> F["等待 400 ms"]
+    F --> G["process.exit(0)"]
+    G --> H["释放端口"]
+    G -.-> I["保留终端与浏览器标签页"]
+```
+
+## 🧱 项目组成
+
+| 层次 | 文件 | 职责 |
+| --- | --- | --- |
+| 宿主侧 | [`lib/index.js`](lib/index.js) | 注册 `dshExit` Cordis 服务和类型化 `exit()` Remote 方法。 |
+| 客户端 | [`lib/client.js`](lib/client.js) | 自包含浏览器 bundle：按钮、样式、弹窗、键盘交互和 Remote 挂载。 |
+| Bundle 补丁 | [`cordis.patch.yml`](cordis.patch.yml) | 向 dsh profile 插入插件行。 |
+| 包元数据 | [`package.json`](package.json) | 声明宿主入口、Web 客户端和 Bundle 补丁。 |
+
+## 🚀 本地安装
+
+当前版本为本地插件，尚未发布到 npm。将它加入 dsh 的 Web profile：
 
 ```sh
 dsh plugin --profile web add "D:\Vibe-coding Projects\dsh\dsh-exit"
 ```
 
-安装后手动重启 profile。无依赖声明——裸导入经 dsh 宿主加载器解析。
+安装后重启 profile。裸导入由 dsh 宿主加载器解析，因此本包不声明运行时依赖。
 
-## 结构
+## 🖥️ 交互说明
 
-- `lib/index.js` —— 宿主侧：注册 `dshExit` cordis 服务与 Typert Remote 方法 `exit()`（网关路径 `/api/dshExit/exit`）。
-- `lib/client.js` —— 浏览器 bundle（自包含、零导入）：悬浮定位 CSS、退出按钮、确认弹窗。
-- `cordis.patch.yml` —— profile 补丁层，插入插件行。
+| 操作 | 结果 |
+| --- | --- |
+| 点击悬浮电源按钮 | 打开确认弹窗。 |
+| 点击**取消**、按 `Esc` 或点击弹窗外部 | 关闭弹窗，不改变宿主状态。 |
+| 点击**确认退出** | 禁用重复操作并调用宿主 Remote 方法。 |
+| Remote 调用失败 | 恢复控件并显示行内错误信息。 |
+| Remote 调用成功 | 关闭弹窗，宿主随后退出。 |
+
+## 🔌 Remote 接口
+
+宿主侧公开一个严格校验、无参数的 Remote 方法：
+
+```text
+namespace: dshExit
+method:    exit
+result:    true
+gateway:   /api/dshExit/exit
+```
+
+dsh 客户端网关成功时返回标准 envelope：`{ ok: true, value: true }`。服务端通过 `exiting` 标志防止重复调用，并在应答有机会完成后延迟执行 `process.exit(0)`。
+
+## 🧪 开发检查
+
+在项目根目录执行轻量语法检查：
+
+```sh
+node --check lib/index.js
+node --check lib/client.js
+```
+
+## 🗺️ 快速信息
+
+- **目标：** DeepSeek Harness Web profile
+- **安装方式：** 本地插件
+- **界面位置：** 右下角悬浮控件
+- **执行动作：** 结束 dsh 宿主进程
+- **dsh 常见端口：** `127.0.0.1:3080`
+- **仓库主题：** `dsh` · `deepseek-harness` · `plugin` · `javascript` · `web`
+
+电源图标来自 [Lucide](https://lucide.dev/icons/power)，遵循其 ISC 许可使用。
+
+<div align="center">
+
+<sub>界面小而专注，退出动作明确且可预期。</sub>
+
+</div>
+
