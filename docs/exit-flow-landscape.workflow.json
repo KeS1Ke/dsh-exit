@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "dsh-exit · 横版退出流程",
+    "output": "docs/exit-flow-landscape.html",
+    "animation": "trace",
+    "quality_profile": "showcase"
+  },
+  "lanes": [
+    { "id": "client", "label": "客户端" },
+    { "id": "host", "label": "dsh 宿主" },
+    { "id": "timer", "label": "应答等待" },
+    { "id": "outcome", "label": "结果" }
+  ],
+  "phases": [
+    { "id": "trigger", "label": "触发与确认", "fromCol": 0, "toCol": 1 },
+    { "id": "invoke", "label": "调用宿主服务", "fromCol": 2, "toCol": 4, "variant": "emphasis" },
+    { "id": "exit", "label": "退出与释放", "fromCol": 5, "toCol": 5, "variant": "dashed" }
+  ],
+  "groups": [
+    { "id": "remote_boundary", "label": "Typert Remote", "lane": "host", "fromCol": 2, "toCol": 2, "variant": "emphasis" },
+    { "id": "grace_window", "label": "应答窗口", "lane": "timer", "fromCol": 4, "toCol": 4, "variant": "dashed" }
+  ],
+  "mainPath": ["click", "confirm", "remote", "service", "grace", "exit", "ports"],
+  "nodes": [
+    { "id": "click", "lane": "client", "col": 0, "type": "frontend", "label": "退出按钮", "sublabel": "右下角浮动" },
+    { "id": "confirm", "lane": "client", "col": 1, "type": "frontend", "label": "确认", "sublabel": "确认 / Esc" },
+    { "id": "keep", "lane": "client", "col": 4, "type": "external", "label": "保留界面", "sublabel": "终端 + 标签页" },
+    { "id": "remote", "lane": "host", "col": 2, "type": "cloud", "label": "Remote 调用", "sublabel": "/api/dshExit/exit" },
+    { "id": "service", "lane": "host", "col": 3, "type": "backend", "label": "宿主服务", "sublabel": "DshExitService" },
+    { "id": "grace", "lane": "timer", "col": 4, "type": "backend", "label": "等待", "sublabel": "setTimeout 400 ms" },
+    { "id": "exit", "lane": "host", "col": 5, "type": "security", "label": "结束进程", "sublabel": "process.exit(0)", "tag": "终止" },
+    { "id": "cancel", "lane": "outcome", "col": 0, "type": "frontend", "label": "继续使用", "sublabel": "取消 / Esc" },
+    { "id": "ports", "lane": "outcome", "col": 5, "type": "cloud", "label": "释放端口", "sublabel": "全部 socket" }
+  ],
+  "edges": [
+    { "from": "click", "to": "confirm", "role": "main" },
+    { "from": "confirm", "to": "cancel", "role": "branch" },
+    { "from": "confirm", "to": "remote", "role": "main", "variant": "emphasis" },
+    { "from": "remote", "to": "service", "role": "main", "variant": "emphasis" },
+    { "from": "service", "to": "grace", "role": "main" },
+    { "from": "grace", "to": "exit", "role": "main", "variant": "security" },
+    { "from": "exit", "to": "ports", "role": "main", "variant": "emphasis" },
+    { "from": "exit", "to": "keep", "role": "branch", "variant": "dashed" }
+  ]
+}
+
