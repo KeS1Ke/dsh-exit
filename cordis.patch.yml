@@ -1,6 +1,6 @@
 # dsh-exit 插件补丁：注册宿主侧退出服务行。
 # 客户端 bundle 由 package.json 的 dsh.client 声明自动发现（/plugins/dsh-exit/client.js）。
-# 本地安装：dsh plugin --profile web add <本目录>
+# npm 安装：dsh plugin --profile web add @kesike/dsh-exit
 - insert:
     - id: dsh-exit
-      name: 'dsh-exit'
+      name: '@kesike/dsh-exit'
