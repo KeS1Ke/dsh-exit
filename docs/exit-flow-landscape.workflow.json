@@ -2,46 +2,58 @@
   "schema_version": 1,
   "diagram_type": "workflow",
   "meta": {
-    "title": "dsh-exit · 横版退出流程",
-    "output": "docs/exit-flow-landscape.html",
+    "title": "dsh-exit · 动态端口退出流程",
     "animation": "trace",
-    "quality_profile": "showcase"
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "happy-path",
+        "label": "确认退出",
+        "focus": ["settings", "address", "confirm", "remote_wait", "exit", "ports"],
+        "note": "从设置末尾的退出栏目开始，展示当前端口读取、Remote 应答、宿主结束和端口释放。"
+      },
+      {
+        "id": "cancel-path",
+        "label": "取消退出",
+        "focus": ["settings", "address", "confirm", "keep"],
+        "note": "取消、按 Esc 或关闭确认后继续使用 dsh。"
+      }
+    ],
+    "output": "docs/exit-flow-latest.html",
+    "viewBox": [1100, 700]
   },
   "lanes": [
-    { "id": "client", "label": "客户端" },
+    { "id": "ui", "label": "Web 设置" },
     { "id": "host", "label": "dsh 宿主" },
-    { "id": "timer", "label": "应答等待" },
-    { "id": "outcome", "label": "结果" }
+    { "id": "shutdown", "label": "结束流程" },
+    { "id": "result", "label": "结果分支" }
   ],
   "phases": [
-    { "id": "trigger", "label": "触发与确认", "fromCol": 0, "toCol": 1 },
-    { "id": "invoke", "label": "调用宿主服务", "fromCol": 2, "toCol": 4, "variant": "emphasis" },
-    { "id": "exit", "label": "退出与释放", "fromCol": 5, "toCol": 5, "variant": "dashed" }
+    { "id": "entry", "label": "入口与确认", "fromCol": 0, "toCol": 2 },
+    { "id": "remote", "label": "Remote 应答", "fromCol": 3, "toCol": 4, "variant": "emphasis" },
+    { "id": "release", "label": "结束与释放", "fromCol": 5, "toCol": 5, "variant": "dashed" }
   ],
   "groups": [
-    { "id": "remote_boundary", "label": "Typert Remote", "lane": "host", "fromCol": 2, "toCol": 2, "variant": "emphasis" },
-    { "id": "grace_window", "label": "应答窗口", "lane": "timer", "fromCol": 4, "toCol": 4, "variant": "dashed" }
+    { "id": "settings_entry", "label": "设置末尾栏目", "lane": "ui", "fromCol": 0, "toCol": 4, "variant": "emphasis" },
+    { "id": "host_contract", "label": "dshExit 服务", "lane": "host", "fromCol": 4, "toCol": 4, "variant": "default" },
+    { "id": "shutdown_contract", "label": "先应答，再结束", "lane": "shutdown", "fromCol": 5, "toCol": 5, "variant": "dashed" }
   ],
-  "mainPath": ["click", "confirm", "remote", "service", "grace", "exit", "ports"],
+  "mainPath": ["settings", "address", "confirm", "remote_wait", "exit", "ports"],
   "nodes": [
-    { "id": "click", "lane": "client", "col": 0, "type": "frontend", "label": "退出按钮", "sublabel": "右下角浮动" },
-    { "id": "confirm", "lane": "client", "col": 1, "type": "frontend", "label": "确认", "sublabel": "确认 / Esc" },
-    { "id": "keep", "lane": "client", "col": 4, "type": "external", "label": "保留界面", "sublabel": "终端 + 标签页" },
-    { "id": "remote", "lane": "host", "col": 2, "type": "cloud", "label": "Remote 调用", "sublabel": "/api/dshExit/exit" },
-    { "id": "service", "lane": "host", "col": 3, "type": "backend", "label": "宿主服务", "sublabel": "DshExitService" },
-    { "id": "grace", "lane": "timer", "col": 4, "type": "backend", "label": "等待", "sublabel": "setTimeout 400 ms" },
-    { "id": "exit", "lane": "host", "col": 5, "type": "security", "label": "结束进程", "sublabel": "process.exit(0)", "tag": "终止" },
-    { "id": "cancel", "lane": "outcome", "col": 0, "type": "frontend", "label": "继续使用", "sublabel": "取消 / Esc" },
-    { "id": "ports", "lane": "outcome", "col": 5, "type": "cloud", "label": "释放端口", "sublabel": "全部 socket" }
+    { "id": "settings", "lane": "ui", "col": 0, "type": "frontend", "label": "设置 · 退出", "sublabel": "左侧列表最后一栏", "tag": "最高排序" },
+    { "id": "address", "lane": "ui", "col": 2, "type": "frontend", "label": "读取当前地址", "sublabel": "location.host", "tag": "动态端口" },
+    { "id": "confirm", "lane": "ui", "col": 4, "type": "security", "label": "确认弹窗", "sublabel": "显示真实 host:port" },
+    { "id": "remote_wait", "lane": "host", "col": 4, "type": "backend", "label": "Remote 调用", "sublabel": "应答 + 400 ms", "tag": "dshExit/exit" },
+    { "id": "exit", "lane": "shutdown", "col": 5, "type": "backend", "label": "结束宿主", "sublabel": "process.exit(0)" },
+    { "id": "ports", "lane": "result", "col": 5, "type": "backend", "label": "释放全部端口", "sublabel": "以实际监听为准" },
+    { "id": "keep", "lane": "result", "col": 0, "type": "frontend", "label": "继续使用 dsh", "sublabel": "取消 / Esc" }
   ],
   "edges": [
-    { "from": "click", "to": "confirm", "role": "main" },
-    { "from": "confirm", "to": "cancel", "role": "branch" },
-    { "from": "confirm", "to": "remote", "role": "main", "variant": "emphasis" },
-    { "from": "remote", "to": "service", "role": "main", "variant": "emphasis" },
-    { "from": "service", "to": "grace", "role": "main" },
-    { "from": "grace", "to": "exit", "role": "main", "variant": "security" },
-    { "from": "exit", "to": "ports", "role": "main", "variant": "emphasis" },
-    { "from": "exit", "to": "keep", "role": "branch", "variant": "dashed" }
+    { "id": "open-settings", "from": "settings", "to": "address", "label": "打开栏目", "role": "main" },
+    { "id": "show-endpoint", "from": "address", "to": "confirm", "label": "显示当前 host:port", "role": "main", "variant": "emphasis" },
+    { "id": "confirm-exit", "from": "confirm", "to": "remote_wait", "label": "确认", "role": "main", "variant": "security", "fromSide": "bottom", "toSide": "top", "route": "drop" },
+    { "id": "cancel-exit", "from": "confirm", "to": "keep", "label": "取消 / Esc", "role": "branch", "variant": "dashed", "via": [[454, 180], [100, 180], [100, 560], [134, 560]] },
+    { "id": "remote-exit", "from": "remote_wait", "to": "exit", "label": "应答后结束", "role": "main", "variant": "emphasis" },
+    { "id": "exit-ports", "from": "exit", "to": "ports", "label": "结束进程", "role": "main", "fromSide": "bottom", "toSide": "top", "route": "drop" }
   ]
 }
