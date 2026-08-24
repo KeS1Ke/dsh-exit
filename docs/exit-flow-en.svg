@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="860" viewBox="0 0 900 860" role="img" aria-labelledby="title desc">
+  <title id="title">dsh-exit exit flow</title>
+  <desc id="desc">Click Exit, confirm, call the host Remote method, wait 400 milliseconds, stop the host process, and release ports while keeping the terminal and browser tab open.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#8b949e"/>
+    </marker>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#000000" flood-opacity=".28"/>
+    </filter>
+    <style>
+      .canvas { fill: #0d1117; }
+      .title { fill: #f0f6fc; font: 700 24px "Segoe UI", Arial, sans-serif; }
+      .box { stroke-width: 2; rx: 14; filter: url(#shadow); }
+      .label { fill: #f0f6fc; font: 600 18px "Segoe UI", Arial, sans-serif; text-anchor: middle; dominant-baseline: middle; }
+      .edge { fill: none; stroke: #8b949e; stroke-width: 2.5; marker-end: url(#arrow); }
+      .edge-dashed { fill: none; stroke: #8b949e; stroke-width: 2.5; stroke-dasharray: 8 7; marker-end: url(#arrow); }
+      .edge-label { fill: #8b949e; font: 600 14px "Segoe UI", Arial, sans-serif; text-anchor: middle; }
+    </style>
+  </defs>
+  <rect class="canvas" width="900" height="860" rx="20"/>
+  <text class="title" x="450" y="42" text-anchor="middle">dsh-exit · exit flow</text>
+
+  <rect class="box" x="270" y="70" width="360" height="64" fill="#4f46e5" stroke="#818cf8"/>
+  <text class="label" x="450" y="102">Click Exit</text>
+
+  <path class="edge" d="M450 134 V184"/>
+  <rect class="box" x="270" y="184" width="360" height="64" fill="#1f6feb" stroke="#58a6ff"/>
+  <text class="label" x="450" y="216">Confirm modal</text>
+
+  <path class="edge" d="M365 248 C315 270 250 285 220 320"/>
+  <text class="edge-label" x="260" y="276">Cancel / Esc</text>
+  <rect class="box" x="40" y="320" width="360" height="64" fill="#21262d" stroke="#8b949e"/>
+  <text class="label" x="220" y="352">Keep using dsh</text>
+
+  <path class="edge" d="M535 248 C585 270 650 285 680 320"/>
+  <text class="edge-label" x="640" y="276">Confirm</text>
+  <rect class="box" x="500" y="320" width="360" height="64" fill="#9a6700" stroke="#d29922"/>
+  <text class="label" x="680" y="352">Call dshExit.exit</text>
+
+  <path class="edge" d="M680 384 V432"/>
+  <rect class="box" x="500" y="432" width="360" height="64" fill="#21262d" stroke="#8b949e"/>
+  <text class="label" x="680" y="464">Return response</text>
+
+  <path class="edge" d="M680 496 V544"/>
+  <rect class="box" x="500" y="544" width="360" height="64" fill="#21262d" stroke="#8b949e"/>
+  <text class="label" x="680" y="576">Wait 400 ms</text>
+
+  <path class="edge" d="M680 608 V656"/>
+  <rect class="box" x="500" y="656" width="360" height="64" fill="#8f2424" stroke="#f85149"/>
+  <text class="label" x="680" y="688">Stop host process</text>
+
+  <path class="edge" d="M590 720 C535 744 450 758 400 790"/>
+  <rect class="box" x="40" y="790" width="360" height="64" fill="#196c3a" stroke="#3fb950"/>
+  <text class="label" x="220" y="822">Release ports</text>
+
+  <path class="edge-dashed" d="M770 720 C820 744 850 758 850 790"/>
+  <rect class="box" x="500" y="790" width="360" height="64" fill="#21262d" stroke="#8b949e"/>
+  <text class="label" x="680" y="822">Keep terminal + tab</text>
+</svg>
+
