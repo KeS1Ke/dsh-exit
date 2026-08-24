@@ -30,7 +30,7 @@
 ## 🎬 Animated exit flow
 
 <p align="center">
-  <img src="docs/dsh-exit.gif" alt="Animated dsh-exit flow generated from Archify" width="720">
+  <video src="https://github.com/user-attachments/assets/ce8738b2-bc31-4c67-be6d-8098f29c7690" controls autoplay muted loop playsinline width="720"></video>
 </p>
 
 ## 📸 Real dsh UI
@@ -49,7 +49,7 @@ The capture below comes from a running dsh Web profile with `dsh-exit` installed
 | Client | [`lib/client.js`](lib/client.js) | Self-contained browser bundle: button, CSS, modal, keyboard handling, and Remote mounting. |
 | Bundle patch | [`cordis.patch.yml`](cordis.patch.yml) | Inserts the plugin row into the dsh profile. |
 | Package metadata | [`package.json`](package.json) | Declares the host entry, web client, and bundle patch. |
-| Animated flow | [`docs/dsh-exit.gif`](docs/dsh-exit.gif) | Archify trace animation converted to a GitHub-inline GIF. |
+| Animated flow | GitHub video attachment | Archify trace animation rendered as a native video. |
 | Real UI capture | [`docs/dsh-exit-real.png`](docs/dsh-exit-real.png) | Running dsh Web profile with the actual button visible. |
 
 
