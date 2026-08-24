@@ -30,15 +30,15 @@
 ## 🧭 Exit flow
 
 ```mermaid
-flowchart LR
-    A["Floating Exit button"] --> B["Confirmation modal"]
-    B -->|Cancel / Esc| C["Stay in dsh"]
-    B -->|Confirm| D["remote.dshExit.exit()"]
-    D --> E["Return acknowledgement"]
-    E --> F["400 ms grace period"]
-    F --> G["process.exit(0)"]
-    G --> H["Ports released"]
-    G -.-> I["Terminal + browser tab remain open"]
+flowchart TB
+    A["Click Exit"] --> B["Confirm modal"]
+    B -->|Cancel / Esc| C["Keep using dsh"]
+    B -->|Confirm| D["Call dshExit.exit"]
+    D --> E["Return response"]
+    E --> F["Wait 400 ms"]
+    F --> G["Stop host process"]
+    G --> H["Release ports"]
+    G -.-> I["Keep terminal + tab"]
 ```
 
 ## 🧱 What ships
