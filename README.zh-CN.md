@@ -67,7 +67,7 @@ npm 包只包含上面四个核心运行文件、包元数据和 README；GitHub
 | --- | --- |
 | 动画 WebP | [`docs/dsh-exit-landscape.webp`](https://github.com/KeS1Ke/dsh-exit/blob/main/docs/dsh-exit-landscape.webp) |
 | MP4 / WebM 视频 | [`docs/dsh-exit-landscape.mp4`](https://github.com/KeS1Ke/dsh-exit/blob/main/docs/dsh-exit-landscape.mp4) · [`docs/dsh-exit-landscape.webm`](https://github.com/KeS1Ke/dsh-exit/blob/main/docs/dsh-exit-landscape.webm) |
-| 真实界面截图 | [`docs/dsh-exit-real.png`](https://github.com/KeS1Ke/dsh-exit/blob/main/docs/dsh-exit-real.png) |
+| Archify 源文件 | [`docs/exit-flow-landscape.html`](https://github.com/KeS1Ke/dsh-exit/blob/main/docs/exit-flow-landscape.html) · [`docs/exit-flow-landscape.workflow.json`](https://github.com/KeS1Ke/dsh-exit/blob/main/docs/exit-flow-landscape.workflow.json) | 最新校验通过的流程图 HTML 与 workflow 源文件。 |\n| 真实界面截图 | [`docs/dsh-exit-real.png`](https://github.com/KeS1Ke/dsh-exit/blob/main/docs/dsh-exit-real.png) | 最新真实 dsh 设置页与动态端口展示。 |
 
 
 ## 🚀 从 npm 安装
@@ -89,7 +89,7 @@ dsh plugin --profile web remove @kesike/dsh-exit
 
 | 操作 | 结果 |
 | --- | --- |
-| 点击悬浮电源按钮 | 打开确认弹窗。 |
+| 打开设置并点击最后的**退出**栏目 | 查看当前 dsh Web 端口并打开退出确认。 |
 | 点击**取消**、按 `Esc` 或点击弹窗外部 | 关闭弹窗，不改变宿主状态。 |
 | 点击**确认退出** | 禁用重复操作并调用宿主 Remote 方法。 |
 | Remote 调用失败 | 恢复控件并显示行内错误信息。 |
@@ -121,7 +121,7 @@ node --check lib/client.js
 
 - **目标：** DeepSeek Harness Web profile
 - **安装方式：** npm 包
-- **界面位置：** 右下角悬浮控件
+- **界面位置：** 设置左侧导航最底部
 - **执行动作：** 结束 dsh 宿主进程
 - **运行端口：** 从设置页当前 dsh Web 地址动态读取
 - **仓库主题：** `dsh` · `deepseek-harness` · `plugin` · `javascript` · `web`
