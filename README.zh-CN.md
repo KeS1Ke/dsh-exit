@@ -28,10 +28,20 @@
 - 保留宿主终端窗口和浏览器标签页，方便后续操作。
 - 使用 dsh 现有设计令牌与 Lucide `power` 电源图标。
 
-## 🎬 动态退出流程
+## 🎬 GitHub 展示区
+
+下面的动画、视频和截图是仓库专用展示素材，保留在 GitHub 用于文档展示，并明确排除在 npm 包之外。
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/KeS1Ke/dsh-exit/main/docs/dsh-exit-landscape.webp" alt="由 Archify 生成的横版 dsh-exit 动态流程图" width="720">
+</p>
+
+<p align="center">
+  <video controls muted loop playsinline width="720" poster="https://raw.githubusercontent.com/KeS1Ke/dsh-exit/main/docs/dsh-exit-landscape.webp">
+    <source src="https://github.com/KeS1Ke/dsh-exit/raw/refs/heads/main/docs/dsh-exit-landscape.mp4" type="video/mp4">
+    <source src="https://github.com/KeS1Ke/dsh-exit/raw/refs/heads/main/docs/dsh-exit-landscape.webm" type="video/webm">
+    <a href="https://github.com/KeS1Ke/dsh-exit/blob/main/docs/dsh-exit-landscape.mp4">下载退出流程视频</a>
+  </video>
 </p>
 
 ## 📸 真实 dsh 界面
@@ -42,7 +52,7 @@
   <img src="https://raw.githubusercontent.com/KeS1Ke/dsh-exit/main/docs/dsh-exit-real.png" alt="运行中的 dsh Web 界面与右下角 dsh-exit 电源按钮" width="720">
 </p>
 
-## 🧱 项目组成
+## 🧱 npm 包内容
 
 | 层次 | 文件 | 职责 |
 | --- | --- | --- |
@@ -50,8 +60,14 @@
 | 客户端 | [`lib/client.js`](lib/client.js) | 自包含浏览器 bundle：按钮、样式、弹窗、键盘交互和 Remote 挂载。 |
 | Bundle 补丁 | [`cordis.patch.yml`](cordis.patch.yml) | 向 dsh profile 插入插件行。 |
 | 包元数据 | [`package.json`](package.json) | 声明宿主入口、Web 客户端和 Bundle 补丁。 |
-| 动态流程 | [`docs/dsh-exit-landscape.webp`](https://github.com/KeS1Ke/dsh-exit/blob/main/docs/dsh-exit-landscape.webp) | 横版 Archify trace 动画，以动画 WebP 直接内嵌。 |
-| 真实界面截图 | [`docs/dsh-exit-real.png`](https://github.com/KeS1Ke/dsh-exit/blob/main/docs/dsh-exit-real.png) | 已运行 dsh Web profile 中的实际按钮。 |
+
+npm 包只包含上面四个核心运行文件、包元数据和 README；GitHub 展示素材单独保留在仓库中：
+
+| 展示素材 | 位置 |
+| --- | --- |
+| 动画 WebP | [`docs/dsh-exit-landscape.webp`](https://github.com/KeS1Ke/dsh-exit/blob/main/docs/dsh-exit-landscape.webp) |
+| MP4 / WebM 视频 | [`docs/dsh-exit-landscape.mp4`](https://github.com/KeS1Ke/dsh-exit/blob/main/docs/dsh-exit-landscape.mp4) · [`docs/dsh-exit-landscape.webm`](https://github.com/KeS1Ke/dsh-exit/blob/main/docs/dsh-exit-landscape.webm) |
+| 真实界面截图 | [`docs/dsh-exit-real.png`](https://github.com/KeS1Ke/dsh-exit/blob/main/docs/dsh-exit-real.png) |
 
 
 ## 🚀 从 npm 安装
