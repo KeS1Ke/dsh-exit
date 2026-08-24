@@ -27,10 +27,25 @@
 - Keeps the terminal window and browser tab available for the next action.
 - Uses the existing dsh design tokens and the Lucide `power` icon.
 
-## 🧭 Exit flow
+## 🎬 Animated exit flow
 
 <p align="center">
-  <img src="docs/exit-flow-en.svg" alt="dsh-exit exit flow" width="720">
+  <video controls loop muted playsinline width="720" poster="docs/dsh-exit-real.png">
+    <source src="docs/dsh-exit.webm" type="video/webm">
+    <a href="docs/dsh-exit.webm">Download the Archify WebM animation</a>
+  </video>
+</p>
+
+<p align="center">
+  <a href="docs/exit-flow-zh.html">Open the interactive Archify viewer</a>
+</p>
+
+## 📸 Real dsh UI
+
+The capture below comes from a running dsh Web profile with `dsh-exit` installed. The red power button is the actual plugin control rendered at the lower-right corner.
+
+<p align="center">
+  <img src="docs/dsh-exit-real.png" alt="Running dsh Web UI with the dsh-exit power button in the lower-right corner" width="720">
 </p>
 
 ## 🧱 What ships
@@ -41,6 +56,10 @@
 | Client | [`lib/client.js`](lib/client.js) | Self-contained browser bundle: button, CSS, modal, keyboard handling, and Remote mounting. |
 | Bundle patch | [`cordis.patch.yml`](cordis.patch.yml) | Inserts the plugin row into the dsh profile. |
 | Package metadata | [`package.json`](package.json) | Declares the host entry, web client, and bundle patch. |
+| Animated flow | [`docs/dsh-exit.webm`](docs/dsh-exit.webm) | Archify-generated 6-second trace animation. |
+| Interactive diagram | [`docs/exit-flow-zh.html`](docs/exit-flow-zh.html) | Full Archify viewer with trace motion and exploration controls. |
+| Real UI capture | [`docs/dsh-exit-real.png`](docs/dsh-exit-real.png) | Running dsh Web profile with the actual button visible. |
+| Diagram source | [`docs/exit-flow-zh.workflow.json`](docs/exit-flow-zh.workflow.json) | Validated Archify workflow specification. |
 
 
 ## 🚀 Install locally
