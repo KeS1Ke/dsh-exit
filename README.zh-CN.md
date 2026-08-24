@@ -7,7 +7,7 @@
 [![dsh Web 插件](https://img.shields.io/badge/dsh-Web%20%E6%8F%92%E4%BB%B6-4f46e5?style=for-the-badge)](https://npmjs.com/package/@deepseek-ai/dsh)
 [![npm](https://img.shields.io/npm/v/%40kesike%2Fdsh-exit?style=for-the-badge&label=npm)](https://www.npmjs.com/package/@kesike/dsh-exit)
 [![平台](https://img.shields.io/badge/%E5%B9%B3%E5%8F%B0-Web-0ea5e9?style=for-the-badge)](https://github.com/KeS1Ke/dsh-exit)
-[![版本](https://img.shields.io/badge/%E7%89%88%E6%9C%AC-0.1.2-64748b?style=for-the-badge)](package.json)
+[![版本](https://img.shields.io/badge/%E7%89%88%E6%9C%AC-0.1.3-64748b?style=for-the-badge)](package.json)
 [![依赖](https://img.shields.io/badge/%E8%BF%90%E8%A1%8C%E6%97%B6%E4%BE%9D%E8%B5%96-%E6%97%A0-16a34a?style=for-the-badge)](package.json)
 
 **简体中文** | [English](https://github.com/KeS1Ke/dsh-exit/blob/main/README.md)
@@ -33,13 +33,13 @@
 下面的动画、视频和截图是仓库专用展示素材，保留在 GitHub 用于文档展示，并明确排除在 npm 包之外。
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/KeS1Ke/dsh-exit/main/docs/dsh-exit-landscape.webp" alt="由 Archify 生成的横版 dsh-exit 动态流程图" width="720">
+  <img src="docs/dsh-exit-landscape.webp" alt="由 Archify 生成的横版 dsh-exit 动态流程图" width="720">
 </p>
 
 <p align="center">
-  <video controls muted loop playsinline width="720" poster="https://raw.githubusercontent.com/KeS1Ke/dsh-exit/main/docs/dsh-exit-landscape.webp">
-    <source src="https://github.com/KeS1Ke/dsh-exit/raw/refs/heads/main/docs/dsh-exit-landscape.mp4" type="video/mp4">
-    <source src="https://github.com/KeS1Ke/dsh-exit/raw/refs/heads/main/docs/dsh-exit-landscape.webm" type="video/webm">
+  <video controls muted loop playsinline width="720" poster="docs/dsh-exit-landscape.webp">
+    <source src="docs/dsh-exit-landscape.mp4" type="video/mp4">
+    <source src="docs/dsh-exit-landscape.webm" type="video/webm">
     <a href="https://github.com/KeS1Ke/dsh-exit/blob/main/docs/dsh-exit-landscape.mp4">下载退出流程视频</a>
   </video>
 </p>
@@ -49,7 +49,7 @@
 下图来自已经安装 `dsh-exit` 的真实 dsh Web profile；右下角的红色电源按钮就是插件实际渲染的控件。
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/KeS1Ke/dsh-exit/main/docs/dsh-exit-real.png" alt="运行中的 dsh Web 界面与右下角 dsh-exit 电源按钮" width="720">
+  <img src="docs/dsh-exit-real.png" alt="运行中的 dsh Web 界面与右下角 dsh-exit 电源按钮" width="720">
 </p>
 
 ## 🧱 npm 包内容
