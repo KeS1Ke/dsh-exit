@@ -1,13 +1,42 @@
 {
-  "name": "dsh-exit",
-  "version": "0.1.0",
+  "name": "@kesike/dsh-exit",
+  "version": "0.1.1",
   "type": "module",
   "description": "在 dsh web 界面提供退出按钮：确认后结束宿主进程并释放端口",
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "dsh-plugin",
+    "plugin",
+    "web",
+    "exit"
+  ],
+  "homepage": "https://github.com/KeS1Ke/dsh-exit#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KeS1Ke/dsh-exit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/KeS1Ke/dsh-exit/issues"
+  },
   "main": "lib/index.js",
   "exports": {
     ".": "./lib/index.js",
     "./client": "./lib/client.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
     "./package.json": "./package.json"
+  },
+  "engines": {
+    "node": ">=22.19.0 || >=24.0.0"
+  },
+  "files": [
+    "lib",
+    "cordis.patch.yml",
+    "!README.zh-CN.md"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   },
   "dsh": {
     "bundle": {
