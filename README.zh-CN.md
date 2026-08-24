@@ -46,7 +46,7 @@
 
 ## 📸 真实 dsh 界面
 
-下图来自已经安装 `dsh-exit` 的真实 dsh Web profile；退出操作现在位于设置左侧导航的最后一栏。
+下图是已经安装 `dsh-exit` 的真实 dsh 设置界面；红色的**退出**就是设置左侧列表底部的插件导航项。
 
 <p align="center">
   <img src="docs/dsh-exit-real.png" alt="运行中的 dsh Web 界面与右下角 dsh-exit 电源按钮" width="720">
@@ -67,7 +67,7 @@ npm 包只包含上面四个核心运行文件、包元数据和 README；GitHub
 | --- | --- |
 | 动画 WebP | [`docs/dsh-exit-landscape.webp`](https://github.com/KeS1Ke/dsh-exit/blob/main/docs/dsh-exit-landscape.webp) |
 | MP4 / WebM 视频 | [`docs/dsh-exit-landscape.mp4`](https://github.com/KeS1Ke/dsh-exit/blob/main/docs/dsh-exit-landscape.mp4) · [`docs/dsh-exit-landscape.webm`](https://github.com/KeS1Ke/dsh-exit/blob/main/docs/dsh-exit-landscape.webm) |
-| Archify 源文件 | [`docs/exit-flow-landscape.html`](https://github.com/KeS1Ke/dsh-exit/blob/main/docs/exit-flow-landscape.html) · [`docs/exit-flow-landscape.workflow.json`](https://github.com/KeS1Ke/dsh-exit/blob/main/docs/exit-flow-landscape.workflow.json) | 最新校验通过的流程图 HTML 与 workflow 源文件。 |\n| 真实界面截图 | [`docs/dsh-exit-real.png`](https://github.com/KeS1Ke/dsh-exit/blob/main/docs/dsh-exit-real.png) | 最新真实 dsh 设置页与动态端口展示。 |
+| Archify 源文件 | [`docs/exit-flow-landscape.html`](https://github.com/KeS1Ke/dsh-exit/blob/main/docs/exit-flow-landscape.html) · [`docs/exit-flow-landscape.workflow.json`](https://github.com/KeS1Ke/dsh-exit/blob/main/docs/exit-flow-landscape.workflow.json) | 最新校验通过的流程图 HTML 与 workflow 源文件。 |\n| 真实界面截图 | [`docs/dsh-exit-real.png`](https://github.com/KeS1Ke/dsh-exit/blob/main/docs/dsh-exit-real.png) | 最新真实 dsh 设置导航与红色退出项。 |
 
 
 ## 🚀 从 npm 安装
