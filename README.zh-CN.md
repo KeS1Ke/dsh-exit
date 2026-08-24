@@ -30,7 +30,7 @@
 ## 🎬 动态退出流程
 
 <p align="center">
-  <video src="https://github.com/user-attachments/assets/ce8738b2-bc31-4c67-be6d-8098f29c7690" controls autoplay muted loop playsinline width="720"></video>
+  <img src="docs/dsh-exit-landscape.webp" alt="由 Archify 生成的横版 dsh-exit 动态流程图" width="720">
 </p>
 
 ## 📸 真实 dsh 界面
@@ -49,7 +49,7 @@
 | 客户端 | [`lib/client.js`](lib/client.js) | 自包含浏览器 bundle：按钮、样式、弹窗、键盘交互和 Remote 挂载。 |
 | Bundle 补丁 | [`cordis.patch.yml`](cordis.patch.yml) | 向 dsh profile 插入插件行。 |
 | 包元数据 | [`package.json`](package.json) | 声明宿主入口、Web 客户端和 Bundle 补丁。 |
-| 动态流程 | GitHub 视频附件 | Archify trace 动画以原生视频播放。 |
+| 动态流程 | [`docs/dsh-exit-landscape.webp`](docs/dsh-exit-landscape.webp) | 横版 Archify trace 动画，以动画 WebP 直接内嵌。 |
 | 真实界面截图 | [`docs/dsh-exit-real.png`](docs/dsh-exit-real.png) | 已运行 dsh Web profile 中的实际按钮。 |
 
 
