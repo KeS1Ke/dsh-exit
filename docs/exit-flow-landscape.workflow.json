@@ -45,4 +45,3 @@
     { "from": "exit", "to": "keep", "role": "branch", "variant": "dashed" }
   ]
 }
-
