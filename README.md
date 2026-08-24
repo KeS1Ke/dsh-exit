@@ -67,7 +67,7 @@ The npm package contains only the four core runtime files above plus package met
 | --- | --- |
 | Animated WebP | [`docs/dsh-exit-landscape.webp`](https://github.com/KeS1Ke/dsh-exit/blob/main/docs/dsh-exit-landscape.webp) |
 | MP4 / WebM video | [`docs/dsh-exit-landscape.mp4`](https://github.com/KeS1Ke/dsh-exit/blob/main/docs/dsh-exit-landscape.mp4) · [`docs/dsh-exit-landscape.webm`](https://github.com/KeS1Ke/dsh-exit/blob/main/docs/dsh-exit-landscape.webm) |
-| Real UI capture | [`docs/dsh-exit-real.png`](https://github.com/KeS1Ke/dsh-exit/blob/main/docs/dsh-exit-real.png) |
+| Archify source | [`docs/exit-flow-landscape.html`](https://github.com/KeS1Ke/dsh-exit/blob/main/docs/exit-flow-landscape.html) · [`docs/exit-flow-landscape.workflow.json`](https://github.com/KeS1Ke/dsh-exit/blob/main/docs/exit-flow-landscape.workflow.json) | Latest validated workflow HTML and source specification. |\n| Real UI capture | [`docs/dsh-exit-real.png`](https://github.com/KeS1Ke/dsh-exit/blob/main/docs/dsh-exit-real.png) | Latest real dsh settings page and dynamic port display. |
 
 
 ## 🚀 Install from npm
@@ -89,7 +89,7 @@ dsh plugin --profile web remove @kesike/dsh-exit
 
 | Interaction | Result |
 | --- | --- |
-| Click the floating power button | Opens the confirmation modal. |
+| Open Settings and click the final **Exit** section | Shows the current dsh Web port and opens the confirmation modal. |
 | Click **Cancel**, press **Esc**, or click outside | Closes the modal without changing the host. |
 | Click **Confirm exit** | Disables duplicate actions and invokes the host Remote method. |
 | Remote call fails | Restores the controls and shows an inline error message. |
@@ -121,7 +121,7 @@ node --check lib/client.js
 
 - **Target:** DeepSeek Harness web profile
 - **Install mode:** npm package
-- **Surface:** lower-right floating control
+- **Surface:** bottom entry in the Settings navigation
 - **Action:** terminate the dsh host process
 - **Runtime port:** read from the current dsh Web address in the settings page
 - **Repository topics:** `dsh` · `deepseek-harness` · `plugin` · `javascript` · `web`
