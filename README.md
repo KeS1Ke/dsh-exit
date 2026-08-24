@@ -29,17 +29,9 @@
 
 ## 🧭 Exit flow
 
-```mermaid
-flowchart TB
-    A["Click Exit"] --> B["Confirm modal"]
-    B -->|Cancel / Esc| C["Keep using dsh"]
-    B -->|Confirm| D["Call dshExit.exit"]
-    D --> E["Return response"]
-    E --> F["Wait 400 ms"]
-    F --> G["Stop host process"]
-    G --> H["Release ports"]
-    G -.-> I["Keep terminal + tab"]
-```
+<p align="center">
+  <img src="docs/exit-flow-en.svg" alt="dsh-exit exit flow" width="720">
+</p>
 
 ## 🧱 What ships
 
@@ -49,6 +41,7 @@ flowchart TB
 | Client | [`lib/client.js`](lib/client.js) | Self-contained browser bundle: button, CSS, modal, keyboard handling, and Remote mounting. |
 | Bundle patch | [`cordis.patch.yml`](cordis.patch.yml) | Inserts the plugin row into the dsh profile. |
 | Package metadata | [`package.json`](package.json) | Declares the host entry, web client, and bundle patch. |
+
 
 ## 🚀 Install locally
 
