@@ -7,7 +7,7 @@
 [![dsh web plugin](https://img.shields.io/badge/dsh-web%20plugin-4f46e5?style=for-the-badge)](https://npmjs.com/package/@deepseek-ai/dsh)
 [![npm](https://img.shields.io/npm/v/%40kesike%2Fdsh-exit?style=for-the-badge&label=npm)](https://www.npmjs.com/package/@kesike/dsh-exit)
 [![Platform](https://img.shields.io/badge/platform-web-0ea5e9?style=for-the-badge)](https://github.com/KeS1Ke/dsh-exit)
-[![Version](https://img.shields.io/badge/version-0.1.3-64748b?style=for-the-badge)](package.json)
+[![Version](https://img.shields.io/badge/version-0.2.0-64748b?style=for-the-badge)](package.json)
 [![Dependencies](https://img.shields.io/badge/runtime%20dependencies-none-16a34a?style=for-the-badge)](package.json)
 
 [简体中文](https://github.com/KeS1Ke/dsh-exit/blob/main/README.zh-CN.md)
@@ -19,9 +19,9 @@
 
 ## ✨ What it does
 
-`dsh-exit` adds a compact, floating **Exit** button to the lower-right corner of the entire dsh web interface.
+`dsh-exit` adds a dedicated **Exit** section to the dsh settings panel. It uses the highest settings order so newly installed settings plugins appear above it.
 
-- Opens a confirmation modal before doing anything destructive.
+- Keeps the **Exit** section at the bottom of the settings navigation.\n- Opens a confirmation modal before doing anything destructive.
 - Calls the typed `dshExit/exit` Remote method only after confirmation.
 - Gives the gateway a short acknowledgement window, then ends the host process.
 - Releases every port held by that process, including the usual `127.0.0.1:3080`.
@@ -46,7 +46,7 @@ The animation, video, and screenshot below are repository showcase assets. They 
 
 ## 📸 Real dsh UI
 
-The capture below comes from a running dsh Web profile with `dsh-exit` installed. The red power button is the actual plugin control rendered at the lower-right corner.
+The capture below comes from a running dsh Web profile with `dsh-exit` installed. The Exit control is now provided by the final section in the settings navigation.
 
 <p align="center">
   <img src="docs/dsh-exit-real.png" alt="Running dsh Web UI with the dsh-exit power button in the lower-right corner" width="720">
@@ -57,7 +57,7 @@ The capture below comes from a running dsh Web profile with `dsh-exit` installed
 | Layer | File | Responsibility |
 | --- | --- | --- |
 | Host | [`lib/index.js`](lib/index.js) | Registers the `dshExit` Cordis service and the typed `exit()` Remote method. |
-| Client | [`lib/client.js`](lib/client.js) | Self-contained browser bundle: button, CSS, modal, keyboard handling, and Remote mounting. |
+| Client | [`lib/client.js`](lib/client.js) | Self-contained browser bundle: settings section, exit button, CSS, modal, keyboard handling, and Remote mounting. |
 | Bundle patch | [`cordis.patch.yml`](cordis.patch.yml) | Inserts the plugin row into the dsh profile. |
 | Package metadata | [`package.json`](package.json) | Declares the host entry, web client, and bundle patch. |
 
