@@ -2,7 +2,7 @@
   "name": "dsh-exit",
   "version": "0.1.0",
   "type": "module",
-  "description": "在 dsh web 侧边栏提供退出按钮：确认后结束宿主进程、释放端口并关闭宿主终端窗口",
+  "description": "在 dsh web 界面提供退出按钮：确认后结束宿主进程并释放端口",
   "main": "lib/index.js",
   "exports": {
     ".": "./lib/index.js",
@@ -18,3 +18,4 @@
     }
   }
 }
+
