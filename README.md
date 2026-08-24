@@ -30,14 +30,7 @@
 ## 🎬 Animated exit flow
 
 <p align="center">
-  <video controls loop muted playsinline width="720" poster="docs/dsh-exit-real.png">
-    <source src="docs/dsh-exit.webm" type="video/webm">
-    <a href="docs/dsh-exit.webm">Download the Archify WebM animation</a>
-  </video>
-</p>
-
-<p align="center">
-  <a href="docs/exit-flow-zh.html">Open the interactive Archify viewer</a>
+  <img src="docs/dsh-exit.gif" alt="Animated dsh-exit flow generated from Archify" width="720">
 </p>
 
 ## 📸 Real dsh UI
@@ -56,10 +49,8 @@ The capture below comes from a running dsh Web profile with `dsh-exit` installed
 | Client | [`lib/client.js`](lib/client.js) | Self-contained browser bundle: button, CSS, modal, keyboard handling, and Remote mounting. |
 | Bundle patch | [`cordis.patch.yml`](cordis.patch.yml) | Inserts the plugin row into the dsh profile. |
 | Package metadata | [`package.json`](package.json) | Declares the host entry, web client, and bundle patch. |
-| Animated flow | [`docs/dsh-exit.webm`](docs/dsh-exit.webm) | Archify-generated 6-second trace animation. |
-| Interactive diagram | [`docs/exit-flow-zh.html`](docs/exit-flow-zh.html) | Full Archify viewer with trace motion and exploration controls. |
+| Animated flow | [`docs/dsh-exit.gif`](docs/dsh-exit.gif) | Archify trace animation converted to a GitHub-inline GIF. |
 | Real UI capture | [`docs/dsh-exit-real.png`](docs/dsh-exit-real.png) | Running dsh Web profile with the actual button visible. |
-| Diagram source | [`docs/exit-flow-zh.workflow.json`](docs/exit-flow-zh.workflow.json) | Validated Archify workflow specification. |
 
 
 ## 🚀 Install locally
