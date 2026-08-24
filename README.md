@@ -46,7 +46,7 @@ The animation, video, and screenshot below are repository showcase assets. They 
 
 ## 📸 Real dsh UI
 
-The capture below comes from a running dsh Web profile with `dsh-exit` installed. The Exit control is now provided by the final section in the settings navigation.
+The capture below is a current dsh settings view with `dsh-exit` installed. The red **Exit** entry is the plugin's real navigation item at the bottom of the settings list.
 
 <p align="center">
   <img src="docs/dsh-exit-real.png" alt="Running dsh Web UI with the dsh-exit power button in the lower-right corner" width="720">
@@ -67,7 +67,7 @@ The npm package contains only the four core runtime files above plus package met
 | --- | --- |
 | Animated WebP | [`docs/dsh-exit-landscape.webp`](https://github.com/KeS1Ke/dsh-exit/blob/main/docs/dsh-exit-landscape.webp) |
 | MP4 / WebM video | [`docs/dsh-exit-landscape.mp4`](https://github.com/KeS1Ke/dsh-exit/blob/main/docs/dsh-exit-landscape.mp4) · [`docs/dsh-exit-landscape.webm`](https://github.com/KeS1Ke/dsh-exit/blob/main/docs/dsh-exit-landscape.webm) |
-| Archify source | [`docs/exit-flow-landscape.html`](https://github.com/KeS1Ke/dsh-exit/blob/main/docs/exit-flow-landscape.html) · [`docs/exit-flow-landscape.workflow.json`](https://github.com/KeS1Ke/dsh-exit/blob/main/docs/exit-flow-landscape.workflow.json) | Latest validated workflow HTML and source specification. |\n| Real UI capture | [`docs/dsh-exit-real.png`](https://github.com/KeS1Ke/dsh-exit/blob/main/docs/dsh-exit-real.png) | Latest real dsh settings page and dynamic port display. |
+| Archify source | [`docs/exit-flow-landscape.html`](https://github.com/KeS1Ke/dsh-exit/blob/main/docs/exit-flow-landscape.html) · [`docs/exit-flow-landscape.workflow.json`](https://github.com/KeS1Ke/dsh-exit/blob/main/docs/exit-flow-landscape.workflow.json) | Latest validated workflow HTML and source specification. |\n| Real UI capture | [`docs/dsh-exit-real.png`](https://github.com/KeS1Ke/dsh-exit/blob/main/docs/dsh-exit-real.png) | Latest real dsh settings navigation with the red Exit entry. |
 
 
 ## 🚀 Install from npm
