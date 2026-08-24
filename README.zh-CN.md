@@ -5,11 +5,12 @@
 **为 DeepSeek Harness Web 界面提供一个明确、可确认的退出控制。**
 
 [![dsh Web 插件](https://img.shields.io/badge/dsh-Web%20%E6%8F%92%E4%BB%B6-4f46e5?style=for-the-badge)](https://npmjs.com/package/@deepseek-ai/dsh)
+[![npm](https://img.shields.io/npm/v/%40kesike%2Fdsh-exit?style=for-the-badge&label=npm)](https://www.npmjs.com/package/@kesike/dsh-exit)
 [![平台](https://img.shields.io/badge/%E5%B9%B3%E5%8F%B0-Web-0ea5e9?style=for-the-badge)](https://github.com/KeS1Ke/dsh-exit)
-[![版本](https://img.shields.io/badge/%E7%89%88%E6%9C%AC-0.1.0-64748b?style=for-the-badge)](package.json)
+[![版本](https://img.shields.io/badge/%E7%89%88%E6%9C%AC-0.1.1-64748b?style=for-the-badge)](package.json)
 [![依赖](https://img.shields.io/badge/%E8%BF%90%E8%A1%8C%E6%97%B6%E4%BE%9D%E8%B5%96-%E6%97%A0-16a34a?style=for-the-badge)](package.json)
 
-**简体中文** | [English](README.md)
+**简体中文** | [English](https://github.com/KeS1Ke/dsh-exit/blob/main/README.md)
 
 </div>
 
@@ -30,7 +31,7 @@
 ## 🎬 动态退出流程
 
 <p align="center">
-  <img src="docs/dsh-exit-landscape.webp" alt="由 Archify 生成的横版 dsh-exit 动态流程图" width="720">
+  <img src="https://raw.githubusercontent.com/KeS1Ke/dsh-exit/main/docs/dsh-exit-landscape.webp" alt="由 Archify 生成的横版 dsh-exit 动态流程图" width="720">
 </p>
 
 ## 📸 真实 dsh 界面
@@ -38,7 +39,7 @@
 下图来自已经安装 `dsh-exit` 的真实 dsh Web profile；右下角的红色电源按钮就是插件实际渲染的控件。
 
 <p align="center">
-  <img src="docs/dsh-exit-real.png" alt="运行中的 dsh Web 界面与右下角 dsh-exit 电源按钮" width="720">
+  <img src="https://raw.githubusercontent.com/KeS1Ke/dsh-exit/main/docs/dsh-exit-real.png" alt="运行中的 dsh Web 界面与右下角 dsh-exit 电源按钮" width="720">
 </p>
 
 ## 🧱 项目组成
@@ -49,19 +50,24 @@
 | 客户端 | [`lib/client.js`](lib/client.js) | 自包含浏览器 bundle：按钮、样式、弹窗、键盘交互和 Remote 挂载。 |
 | Bundle 补丁 | [`cordis.patch.yml`](cordis.patch.yml) | 向 dsh profile 插入插件行。 |
 | 包元数据 | [`package.json`](package.json) | 声明宿主入口、Web 客户端和 Bundle 补丁。 |
-| 动态流程 | [`docs/dsh-exit-landscape.webp`](docs/dsh-exit-landscape.webp) | 横版 Archify trace 动画，以动画 WebP 直接内嵌。 |
-| 真实界面截图 | [`docs/dsh-exit-real.png`](docs/dsh-exit-real.png) | 已运行 dsh Web profile 中的实际按钮。 |
+| 动态流程 | [`docs/dsh-exit-landscape.webp`](https://github.com/KeS1Ke/dsh-exit/blob/main/docs/dsh-exit-landscape.webp) | 横版 Archify trace 动画，以动画 WebP 直接内嵌。 |
+| 真实界面截图 | [`docs/dsh-exit-real.png`](https://github.com/KeS1Ke/dsh-exit/blob/main/docs/dsh-exit-real.png) | 已运行 dsh Web profile 中的实际按钮。 |
 
 
-## 🚀 本地安装
+## 🚀 从 npm 安装
 
-当前版本为本地插件，尚未发布到 npm。将它加入 dsh 的 Web profile：
+直接将 npm 包加入 dsh 的 Web profile：
 
 ```sh
-dsh plugin --profile web add "D:\Vibe-coding Projects\dsh\dsh-exit"
+dsh plugin --profile web add @kesike/dsh-exit
 ```
 
-安装后重启 profile。裸导入由 dsh 宿主加载器解析，因此本包不声明运行时依赖。
+安装后重启 profile。裸导入由 dsh 宿主加载器解析，因此本包不声明运行时依赖。更新或移除：
+
+```sh
+dsh plugin --profile web update @kesike/dsh-exit
+dsh plugin --profile web remove @kesike/dsh-exit
+```
 
 ## 🖥️ 交互说明
 
@@ -98,7 +104,7 @@ node --check lib/client.js
 ## 🗺️ 快速信息
 
 - **目标：** DeepSeek Harness Web profile
-- **安装方式：** 本地插件
+- **安装方式：** npm 包
 - **界面位置：** 右下角悬浮控件
 - **执行动作：** 结束 dsh 宿主进程
 - **dsh 常见端口：** `127.0.0.1:3080`
@@ -111,5 +117,4 @@ node --check lib/client.js
 <sub>界面小而专注，退出动作明确且可预期。</sub>
 
 </div>
-
 
