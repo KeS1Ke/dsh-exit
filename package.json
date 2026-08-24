@@ -1,0 +1,20 @@
+{
+  "name": "dsh-exit",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "在 dsh web 侧边栏提供退出按钮：确认后结束宿主进程、释放端口并关闭宿主终端窗口",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web"
+    }
+  }
+}
