@@ -29,17 +29,9 @@
 
 ## 🧭 退出流程
 
-```mermaid
-flowchart TB
-    A["点击退出"] --> B["确认弹窗"]
-    B -->|取消 / Esc| C["继续使用 dsh"]
-    B -->|确认| D["调用 dshExit.exit"]
-    D --> E["返回应答"]
-    E --> F["等待 400 ms"]
-    F --> G["结束宿主进程"]
-    G --> H["释放端口"]
-    G -.-> I["保留终端与标签页"]
-```
+<p align="center">
+  <img src="docs/exit-flow-zh.svg" alt="dsh-exit 退出流程" width="720">
+</p>
 
 ## 🧱 项目组成
 
@@ -49,6 +41,7 @@ flowchart TB
 | 客户端 | [`lib/client.js`](lib/client.js) | 自包含浏览器 bundle：按钮、样式、弹窗、键盘交互和 Remote 挂载。 |
 | Bundle 补丁 | [`cordis.patch.yml`](cordis.patch.yml) | 向 dsh profile 插入插件行。 |
 | 包元数据 | [`package.json`](package.json) | 声明宿主入口、Web 客户端和 Bundle 补丁。 |
+
 
 ## 🚀 本地安装
 
