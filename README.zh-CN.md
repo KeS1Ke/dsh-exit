@@ -7,7 +7,7 @@
 [![dsh Web 插件](https://img.shields.io/badge/dsh-Web%20%E6%8F%92%E4%BB%B6-4f46e5?style=for-the-badge)](https://npmjs.com/package/@deepseek-ai/dsh)
 [![npm](https://img.shields.io/npm/v/%40kesike%2Fdsh-exit?style=for-the-badge&label=npm)](https://www.npmjs.com/package/@kesike/dsh-exit)
 [![平台](https://img.shields.io/badge/%E5%B9%B3%E5%8F%B0-Web-0ea5e9?style=for-the-badge)](https://github.com/KeS1Ke/dsh-exit)
-[![版本](https://img.shields.io/badge/%E7%89%88%E6%9C%AC-0.1.3-64748b?style=for-the-badge)](package.json)
+[![版本](https://img.shields.io/badge/%E7%89%88%E6%9C%AC-0.2.0-64748b?style=for-the-badge)](package.json)
 [![依赖](https://img.shields.io/badge/%E8%BF%90%E8%A1%8C%E6%97%B6%E4%BE%9D%E8%B5%96-%E6%97%A0-16a34a?style=for-the-badge)](package.json)
 
 **简体中文** | [English](https://github.com/KeS1Ke/dsh-exit/blob/main/README.md)
@@ -19,9 +19,9 @@
 
 ## ✨ 功能概览
 
-`dsh-exit` 在 dsh Web 界面右下角增加一个紧凑的悬浮**退出**按钮。
+`dsh-exit` 在 dsh 设置面板中增加一个独立的**退出**栏目，并使用最高排序值，确保新安装的设置类插件仍排在它前面。
 
-- 先弹出确认弹窗，确认前不会执行退出动作。
+- **退出**栏目始终位于设置左侧导航的最底部。\n- 先弹出确认弹窗，确认前不会执行退出动作。
 - 确认后调用类型化的 `dshExit/exit` Remote 方法。
 - 先返回调用应答，再等待短暂窗口结束宿主进程。
 - 释放该进程占用的全部端口，包括常见的 `127.0.0.1:3080`。
@@ -46,7 +46,7 @@
 
 ## 📸 真实 dsh 界面
 
-下图来自已经安装 `dsh-exit` 的真实 dsh Web profile；右下角的红色电源按钮就是插件实际渲染的控件。
+下图来自已经安装 `dsh-exit` 的真实 dsh Web profile；退出操作现在位于设置左侧导航的最后一栏。
 
 <p align="center">
   <img src="docs/dsh-exit-real.png" alt="运行中的 dsh Web 界面与右下角 dsh-exit 电源按钮" width="720">
@@ -57,7 +57,7 @@
 | 层次 | 文件 | 职责 |
 | --- | --- | --- |
 | 宿主侧 | [`lib/index.js`](lib/index.js) | 注册 `dshExit` Cordis 服务和类型化 `exit()` Remote 方法。 |
-| 客户端 | [`lib/client.js`](lib/client.js) | 自包含浏览器 bundle：按钮、样式、弹窗、键盘交互和 Remote 挂载。 |
+| 客户端 | [`lib/client.js`](lib/client.js) | 自包含浏览器 bundle：设置栏目、退出按钮、样式、弹窗、键盘交互和 Remote 挂载。 |
 | Bundle 补丁 | [`cordis.patch.yml`](cordis.patch.yml) | 向 dsh profile 插入插件行。 |
 | 包元数据 | [`package.json`](package.json) | 声明宿主入口、Web 客户端和 Bundle 补丁。 |
 
