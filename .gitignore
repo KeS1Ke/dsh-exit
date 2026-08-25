@@ -9,6 +9,14 @@ coverage/
 # Local analysis artifacts
 graphify-out/
 
+# Local screenshots, visual checks, and superseded diagram drafts
+pic1.png
+docs/exit-flow-latest.*
+docs/dsh-exit.gif
+docs/dsh-exit.mp4
+docs/dsh-exit.webm
+docs/exit-flow-zh.*
+
 # Logs and debug output
 *.log
 npm-debug.log*
