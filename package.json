@@ -1,6 +1,7 @@
 {
   "name": "@kesike/dsh-exit",
-  "version": "0.2.3",
+  "version": "0.2.4",
+  "license": "MIT",
   "type": "module",
   "description": "在 dsh web 界面提供退出按钮：确认后结束宿主进程并释放端口",
   "keywords": [
@@ -52,4 +53,3 @@
     }
   }
 }
-

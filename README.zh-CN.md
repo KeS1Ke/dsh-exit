@@ -7,13 +7,12 @@
 [![dsh Web 插件](https://img.shields.io/badge/dsh-Web%20%E6%8F%92%E4%BB%B6-4f46e5?style=for-the-badge)](https://npmjs.com/package/@deepseek-ai/dsh)
 [![npm](https://img.shields.io/npm/v/%40kesike%2Fdsh-exit?style=for-the-badge&label=npm)](https://www.npmjs.com/package/@kesike/dsh-exit)
 [![平台](https://img.shields.io/badge/%E5%B9%B3%E5%8F%B0-Web-0ea5e9?style=for-the-badge)](https://github.com/KeS1Ke/dsh-exit)
-[![版本](https://img.shields.io/badge/%E7%89%88%E6%9C%AC-0.2.3-64748b?style=for-the-badge)](package.json)
+[![版本](https://img.shields.io/badge/%E7%89%88%E6%9C%AC-0.2.4-64748b?style=for-the-badge)](package.json)
 [![依赖](https://img.shields.io/badge/%E8%BF%90%E8%A1%8C%E6%97%B6%E4%BE%9D%E8%B5%96-%E6%97%A0-16a34a?style=for-the-badge)](package.json)
 
 **简体中文** | [English](https://github.com/KeS1Ke/dsh-exit/blob/main/README.md)
 
 </div>
-
 > [!IMPORTANT]
 > 确认退出后会结束 dsh 宿主进程并释放其占用的端口；宿主终端窗口和当前浏览器标签页会被刻意保留。
 

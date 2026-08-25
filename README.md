@@ -7,13 +7,12 @@
 [![dsh web plugin](https://img.shields.io/badge/dsh-web%20plugin-4f46e5?style=for-the-badge)](https://npmjs.com/package/@deepseek-ai/dsh)
 [![npm](https://img.shields.io/npm/v/%40kesike%2Fdsh-exit?style=for-the-badge&label=npm)](https://www.npmjs.com/package/@kesike/dsh-exit)
 [![Platform](https://img.shields.io/badge/platform-web-0ea5e9?style=for-the-badge)](https://github.com/KeS1Ke/dsh-exit)
-[![Version](https://img.shields.io/badge/version-0.2.3-64748b?style=for-the-badge)](package.json)
+[![Version](https://img.shields.io/badge/version-0.2.4-64748b?style=for-the-badge)](package.json)
 [![Dependencies](https://img.shields.io/badge/runtime%20dependencies-none-16a34a?style=for-the-badge)](package.json)
 
 [简体中文](https://github.com/KeS1Ke/dsh-exit/blob/main/README.zh-CN.md)
 
 </div>
-
 > [!IMPORTANT]
 > Confirming the action terminates the dsh host process and releases its ports. The host terminal window and the current browser tab are intentionally left open.
 
