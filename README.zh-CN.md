@@ -30,7 +30,7 @@
 
 ## 🎬 GitHub 展示区
 
-下面的动画、视频和截图是仓库专用展示素材，保留在 GitHub 用于文档展示，并明确排除在 npm 包之外。
+下面展示退出流程，以及插件在 dsh 设置面板中的实际效果。
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/KeS1Ke/dsh-exit/main/docs/dsh-exit-landscape.webp" alt="由 Archify 生成的横版 dsh-exit 动态流程图" width="720">
@@ -61,7 +61,7 @@
 | Bundle 补丁 | [`cordis.patch.yml`](cordis.patch.yml) | 向 dsh profile 插入插件行。 |
 | 包元数据 | [`package.json`](package.json) | 声明宿主入口、Web 客户端和 Bundle 补丁。 |
 
-npm 包只包含上面四个核心运行文件、包元数据和 README；GitHub 展示素材单独保留在仓库中：
+npm 包聚焦于运行所需的源码和包元数据，下面同时提供截图和流程源文件：
 
 | 展示素材 | 位置 |
 | --- | --- |
