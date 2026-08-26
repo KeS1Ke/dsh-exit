@@ -1,9 +1,11 @@
 {
   "name": "@kesike/dsh-exit",
-  "version": "0.2.4",
-  "license": "MIT",
+  "version": "0.2.5",
   "type": "module",
   "description": "在 dsh web 界面提供退出按钮：确认后结束宿主进程并释放端口",
+  "scripts": {
+    "test": "node --test"
+  },
   "keywords": [
     "dsh",
     "deepseek-harness",
@@ -30,6 +32,13 @@
   "engines": {
     "node": ">=22.19.0 || >=24.0.0"
   },
+  "peerDependencies": {
+    "@deepseek-ai/dsh-api-remotes": "^0.1.1-rc.2",
+    "@deepseek-ai/dsh-client-locale": "^0.1.1-rc.2",
+    "@deepseek-ai/dsh-client-runtime": "^0.1.1-rc.2",
+    "@deepseek-ai/dsh-client-ui-settings": "^0.1.1-rc.2",
+    "@deepseek-ai/dsh-typert-protocol": "^0.1.1-rc.2"
+  },
   "files": [
     "lib",
     "cordis.patch.yml",
@@ -45,11 +54,13 @@
     },
     "client": {
       "inject": [
+        "@deepseek-ai/dsh-api-remotes",
         "@deepseek-ai/dsh-client-runtime",
-        "@deepseek-ai/dsh-client-ui-slots",
+        "@deepseek-ai/dsh-client-ui-settings",
         "@deepseek-ai/dsh-client-locale"
       ],
       "platform": "web"
     }
   }
 }
+
