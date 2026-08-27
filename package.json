@@ -1,7 +1,7 @@
 {
   "name": "@kesike/dsh-start-and-exit",
   "displayName": "dsh-start&exit",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "type": "module",
   "description": "在 dsh Web 界面提供启动、退出与重新启动控制，并提供 Windows 前台启动器；WebUI 就绪后最小化终端",
   "license": "MIT",
