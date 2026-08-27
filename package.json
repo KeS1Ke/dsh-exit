@@ -1,8 +1,9 @@
 {
-  "name": "@kesike/dsh-exit",
+  "name": "@kesike/dsh-start-and-exit",
+  "displayName": "dsh-start&exit",
   "version": "0.2.6",
   "type": "module",
-  "description": "在 dsh web 界面提供退出按钮：确认后结束宿主进程并释放端口",
+  "description": "在 dsh Web 界面提供启动、退出与重新启动控制，并提供 Windows 前台启动器；WebUI 就绪后最小化终端",
   "license": "MIT",
   "scripts": {
     "test": "node --test"
@@ -13,15 +14,20 @@
     "dsh-plugin",
     "plugin",
     "web",
-    "exit"
+    "exit",
+    "start",
+    "restart",
+    "powershell",
+    "windows",
+    "desktop"
   ],
-  "homepage": "https://github.com/KeS1Ke/dsh-exit#readme",
+  "homepage": "https://github.com/KeS1Ke/dsh-start-and-exit#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/KeS1Ke/dsh-exit.git"
+    "url": "git+https://github.com/KeS1Ke/dsh-start-and-exit.git"
   },
   "bugs": {
-    "url": "https://github.com/KeS1Ke/dsh-exit/issues"
+    "url": "https://github.com/KeS1Ke/dsh-start-and-exit/issues"
   },
   "main": "lib/index.js",
   "exports": {
